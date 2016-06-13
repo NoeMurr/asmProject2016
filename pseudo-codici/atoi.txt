@@ -1,0 +1,3 @@
+atoi
+
+Funzione che ritorna l' intero relativo ad una stringa di caratteri ascii.
