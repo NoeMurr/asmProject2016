@@ -1,0 +1,453 @@
+{
+  "title": "asmProject2016",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "61": {
+      "title": "funzioni",
+      "id": 22,
+      "ideas": {
+        "1": {
+          "title": "checkReset",
+          "id": 10
+        },
+        "2": {
+          "title": "checkInit",
+          "id": 9,
+          "attr": {
+            "style": {}
+          }
+        },
+        "3": {
+          "title": "checkRpm",
+          "id": 7,
+          "attr": {
+            "style": {}
+          }
+        },
+        "4": {
+          "title": "itoa",
+          "id": 6,
+          "attr": {
+            "style": {}
+          }
+        },
+        "5": {
+          "title": "atoi",
+          "id": 5,
+          "attr": {
+            "style": {}
+          }
+        },
+        "6": {
+          "title": "scrittura su file",
+          "id": 3,
+          "attr": {
+            "style": {}
+          }
+        },
+        "7": {
+          "title": "lettura da file",
+          "id": 2,
+          "attr": {
+            "style": {}
+          }
+        },
+        "8": {
+          "title": "checkSec",
+          "id": 107
+        },
+        "9": {
+          "title": "closeFile",
+          "id": 121
+        },
+        "0.5": {
+          "title": "openFile",
+          "id": 115
+        }
+      },
+      "attr": {
+        "style": {}
+      }
+    },
+    "62": {
+      "title": "variabili globali",
+      "id": 29,
+      "ideas": {
+        "1": {
+          "title": "Secondi",
+          "id": 30
+        },
+        "2": {
+          "title": "init",
+          "id": 116
+        },
+        "3": {
+          "title": "reset",
+          "id": 117
+        },
+        "4": {
+          "title": "rpm",
+          "id": 118
+        },
+        "5": {
+          "title": "file buffer: contiene l'intero file di input caricato in memoria",
+          "id": 122
+        }
+      },
+      "attr": {
+        "style": {}
+      }
+    },
+    "-1": {
+      "title": "diagramma di esecuzione",
+      "id": 119,
+      "ideas": {
+        "1": {
+          "title": "EOF",
+          "id": 38,
+          "ideas": {
+            "1": {
+              "title": "se no",
+              "id": 42,
+              "ideas": {
+                "1": {
+                  "title": "lettura di una riga dal file",
+                  "id": 11,
+                  "ideas": {
+                    "1": {
+                      "title": "checkInit",
+                      "id": 12,
+                      "ideas": {
+                        "1": {
+                          "title": "se init == 1",
+                          "id": 13,
+                          "ideas": {
+                            "1": {
+                              "title": "checkRpm",
+                              "id": 16,
+                              "ideas": {
+                                "1": {
+                                  "title": "se  rpm ==  -1",
+                                  "id": 23,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "mod = SG",
+                                      "id": 24,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "checkReset",
+                                          "id": 31,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "se checkReset ==  1",
+                                              "id": 32,
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = 0",
+                                                  "id": 33,
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "scrivi su file la stringa: 01,00,0",
+                                                      "id": 36,
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "torna a EOF",
+                                                          "id": 37,
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ff0000"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "2": {
+                                              "title": "se checkReset == 0",
+                                              "id": 34,
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = secondi +1",
+                                                  "id": 35,
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "scrivi su file la stringa: 01,secondi,0",
+                                                      "id": 43,
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "torna a EOF",
+                                                          "id": 44,
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ff0000"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "2": {
+                                  "title": "se rpm == 0",
+                                  "id": 25,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "mod  = OPT",
+                                      "id": 26,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "checkReset",
+                                          "ideas": {
+                                            "1": {
+                                              "title": "se checkReset ==  1",
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = 0",
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "scrivi su file la stringa: 10,00,0",
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "torna a EOF",
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ff0000"
+                                                            }
+                                                          },
+                                                          "id": 90
+                                                        }
+                                                      },
+                                                      "id": 89
+                                                    }
+                                                  },
+                                                  "id": 88
+                                                }
+                                              },
+                                              "id": 87
+                                            },
+                                            "2": {
+                                              "title": "se checkReset == 0",
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = secondi +1",
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "scrivi su file la stringa: 10,secondi,0",
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "torna a EOF",
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ff0000"
+                                                            }
+                                                          },
+                                                          "id": 94
+                                                        }
+                                                      },
+                                                      "id": 93
+                                                    }
+                                                  },
+                                                  "id": 92
+                                                }
+                                              },
+                                              "id": 91
+                                            }
+                                          },
+                                          "id": 86,
+                                          "attr": {
+                                            "style": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "3": {
+                                  "title": "se rpm == 1",
+                                  "id": 27,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "mod = FG",
+                                      "id": 28,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "checkReset",
+                                          "ideas": {
+                                            "1": {
+                                              "title": "se checkReset ==  1",
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = 0",
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "scrivi su file la stringa: 11,00,0",
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "torna a EOF",
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ff0000"
+                                                            }
+                                                          },
+                                                          "id": 99
+                                                        }
+                                                      },
+                                                      "id": 98
+                                                    }
+                                                  },
+                                                  "id": 97
+                                                }
+                                              },
+                                              "id": 96
+                                            },
+                                            "2": {
+                                              "title": "se checkReset == 0",
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "secondi = secondi +1",
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "checkSec",
+                                                      "id": 106,
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "se secondi < 15",
+                                                          "id": 114,
+                                                          "ideas": {
+                                                            "1": {
+                                                              "title": "scrivi su file la stringa: 01,secondi,0",
+                                                              "ideas": {
+                                                                "1": {
+                                                                  "title": "torna a EOF",
+                                                                  "attr": {
+                                                                    "style": {
+                                                                      "background": "#ff0000"
+                                                                    }
+                                                                  },
+                                                                  "id": 103
+                                                                }
+                                                              },
+                                                              "id": 102
+                                                            }
+                                                          }
+                                                        },
+                                                        "2": {
+                                                          "title": "se secondi >= 15",
+                                                          "id": 109,
+                                                          "ideas": {
+                                                            "1": {
+                                                              "title": "scrivi su file la stringa: 11,secondi,1",
+                                                              "id": 111,
+                                                              "ideas": {
+                                                                "1": {
+                                                                  "title": "torna a EOF",
+                                                                  "id": 112,
+                                                                  "attr": {
+                                                                    "style": {
+                                                                      "background": "#ff0000"
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "id": 101
+                                                }
+                                              },
+                                              "id": 100
+                                            }
+                                          },
+                                          "id": 95,
+                                          "attr": {
+                                            "style": {}
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "2": {
+                          "title": "se init == 0",
+                          "id": 14,
+                          "ideas": {
+                            "1": {
+                              "title": "scrivi su file tutti 0",
+                              "id": 15,
+                              "ideas": {
+                                "1": {
+                                  "title": "torna a EOF",
+                                  "id": 19,
+                                  "attr": {
+                                    "style": {
+                                      "background": "#ff0000"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#99cc00"
+                    }
+                  }
+                }
+              }
+            },
+            "2": {
+              "title": "se si ",
+              "id": 40,
+              "ideas": {
+                "1": {
+                  "title": "fine programma",
+                  "id": 41,
+                  "attr": {
+                    "style": {
+                      "background": "#000000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00ffff"
+            }
+          }
+        }
+      },
+      "attr": {
+        "style": {}
+      }
+    }
+  },
+  "links": [],
+  "attr": {
+    "style": {}
+  }
+}
