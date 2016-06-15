@@ -8,8 +8,8 @@
 
 # variabili globali
 .text
-input_filename: "input.txt"
-output_filename: "output.txt"
+input_filename: .asciz "input.txt"
+output_filename: .asciz "output.txt"
 .data
 # variabili modificabili
 .bss
