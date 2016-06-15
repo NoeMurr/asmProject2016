@@ -89,10 +89,6 @@
         "4": {
           "title": "rpm",
           "id": 118
-        },
-        "5": {
-          "title": "file buffer: contiene l'intero file di input caricato in memoria",
-          "id": 122
         }
       },
       "attr": {
