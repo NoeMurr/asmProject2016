@@ -7,7 +7,7 @@
 	input_fd: .long 0 							# variabile globale che conterra' il file
 									  							# descriptor del file di input
 
-output_fd:  .long 0 							# variabile globale che conterra' il file
+	output_fd:  .long 0 						# variabile globale che conterra' il file
 	                   							# descriptor del file di output
 .section .text
 	.globl 	_open_files 						# dichiaro la funzione globale
@@ -36,7 +36,7 @@ _open_files:
 	movl 		$0, %ecx 								# read-only mode
 	int 		$0x80 									# apro il file
 
-	movl 		%eax, output_fd 				# metto il file descriptor nella sua 
+	movl 		%eax, output_fd 				# metto il file descriptor nella sua
 																	# variabile come prima
 
 	ret 														# fine della funzione ed anche del file.
