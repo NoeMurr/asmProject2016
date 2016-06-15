@@ -1,1 +1,7 @@
 read line deve leggere una riga di un file il cui path e' nello stack
+
+premesse:
+	1. il file deve essere aperto;
+	2. 
+
+1. ecx <-
