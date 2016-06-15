@@ -1,7 +1,7 @@
 # Progetto assembly 2016
 # File: main.s
-# Date: 2016
-# Authors: Alessandro Righi, Noè Murr, Mirko Morati
+# Data: 2016
+# Autori: Alessandro Righi, Noè Murr, Mirko Morati
 # Descrizione: entry point del programma
 
 .incluce "syscall.inc"
