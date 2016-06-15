@@ -4,7 +4,7 @@
 # Autori: Alessandro Righi, Noè Murr, Mirko Morati
 # Descrizione: entry point del programma
 
-.incluce "syscall.inc"
+.include "syscall.inc"
 
 # variabili globali
 .text
