@@ -4,34 +4,39 @@
 # rispettivamente in %eax(input) ed in %ebx(output)
 
 .section .data
-	input_fd: .long 0 # variabile globale che conterra' il file descriptor
-									  # del file di input
+	input_fd: .long 0 							# variabile globale che conterra' il file
+									  							# descriptor del file di input
 
-	output_fd: .long 0 # variabile globale che conterra' il file descriptor
-	                   # del file di output
+output_fd:  .long 0 							# variabile globale che conterra' il file
+	                   							# descriptor del file di output
 .section .text
-	.globl _open_files # dichiaro la funzione globale
-	.type _open_files, @function # dichiaro l' etichetta come una funzione
+	.globl 	_open_files 						# dichiaro la funzione globale
+	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
 
-	.globl input_fd #dichiaro la variabile come globale
-	.globl output_fd #dichiaro la variabile come globale
+	.globl 	input_fd 								#dichiaro la variabile come globale
+	.globl 	output_fd 							#dichiaro la variabile come globale
 
 _open_files:
-	pushl %ebx #pusho l' indirizzo del file di output sullo stak
+	pushl 	%ebx 										#pusho l' indirizzo del file di output sullo
+																	# stack
 
-	movl %eax, %ebx # sposto l' indirizzo del file che vado ad aprire in %ebx
-	movl $5, %eax # chiamata di sistema open
-	movl $0, %ecx # read-only mode
-	int $0x80 # apro il file
+	movl 		%eax, %ebx 							# sposto l' indirizzo del file che vado
+																	# ad aprire in %ebx
 
-	movl %eax, input_fd # metto il file descriptor nella sua variabile
+	movl 		$5, %eax 								# chiamata di sistema open
+	movl 		$0, %ecx 								# read-only mode
+	int 		$0x80 									# apro il file
 
-	popl $ebx # riprendo l' indirizzo del nome del file di output che avevo
-						# messo sullo stack
-	movl $5, %eax # chiamata di sistema open
-	movl $0, %ecx # read-only mode
-	int $0x80 # apro il file
+	movl 		%eax, input_fd 					# metto il file descriptor nella sua variabile
 
-	movl %eax, output_fd # metto il file descriptor nella sua variabile come prima
+	popl 		$ebx 										# riprendo l' indirizzo del nome del file
+																	# di output che avevo messo sullo stack
 
-	ret # fine della funzione ed anche del file.
+	movl 		$5, %eax 								# chiamata di sistema open
+	movl 		$0, %ecx 								# read-only mode
+	int 		$0x80 									# apro il file
+
+	movl 		%eax, output_fd 				# metto il file descriptor nella sua 
+																	# variabile come prima
+
+	ret 														# fine della funzione ed anche del file.
