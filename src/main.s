@@ -17,8 +17,7 @@ output_filename: "output.txt"
 
 # codice del programma
 .text
-.global funzione
-.type funzione, @function
+.global _start
 _start:
     pushl %ebp
     movl %esp, %ebp

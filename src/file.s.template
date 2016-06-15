@@ -18,7 +18,7 @@
 .text
 .global funzione
 .type funzione, @function
-_start:
+funzione:
     pushl %ebp
     movl %esp, %ebp
 
