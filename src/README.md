@@ -7,6 +7,9 @@ Linee guida che vorrei venissero seguite (bhe poi fate come volete)
 
 -   le funzioni in file separati (come da richiesta)
 
+-   tutti i file sorgenti in un unica directory (non voglio diventare matto
+    per scrivere il Makefile, grazie)
+
 -   per compilare si usa il Makefile
 
 -   per compilare in modalità debug aggiustare le opzioni ASFLAGS ed LDFLAGS
