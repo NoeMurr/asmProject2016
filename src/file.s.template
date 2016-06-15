@@ -4,6 +4,8 @@
 # Authors: Alessandro Righi, Noè Murr, Mirko Morati
 # Descrizione: descrizione
 
+.incluce "syscall.inc"
+
 # variabili globali
 .text
 # variabili const
