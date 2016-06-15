@@ -1,7 +1,7 @@
 # file che serve per vedere se la funzione open_files funziona
 .section .data
-	input_file: .ascii "prova1.txt"
-	output_file: .ascii "prova2.txt"
+	input_file: .asciz "prova1.txt"
+	output_file: .asciz "prova2.txt"
 
 .section .text
 	.globl 	_start
