@@ -6,4 +6,8 @@
 .equ SYS_OPEN, 5
 .equ SYS_CLOSE, 6
 
+.equ STDIN, 0
+.equ STDOUT, 1
+.equ STDERR, 2
+
 .equ SYSCALL, 0x80
