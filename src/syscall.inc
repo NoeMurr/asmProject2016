@@ -10,4 +10,4 @@
 .equ STDOUT, 1
 .equ STDERR, 2
 
-.equ SYSCALL, 0x80
+.equ SYS_CALL, 0x80
