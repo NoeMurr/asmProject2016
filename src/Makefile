@@ -1,7 +1,7 @@
 # Makefile per il progetto assembly
 
 AS:=as
-ASLAGS:=-m32
+ASFLAGS:=-32
 LD:=ld
 LDFLAGS:=-m elf_i386
 BINNAME=elaborato
@@ -12,9 +12,9 @@ ECHO=/bin/echo
 
 .PHONY: all run clean rebuild help 
 
-%.o: %.c $(HEADERS)
+%.o: %.s $(HEADERS)
 	@$(ECHO) -n "Compiling $< 	"
-	@$(AS) -c -o $@ $< $(ASLAGS)
+	@$(AS) -c -o $@ $< $(ASFLAGS)
 	@$(ECHO) "[ ok ]"
 
 $(BINNAME): $(OBJ)
@@ -24,7 +24,7 @@ $(BINNAME): $(OBJ)
 
 all: $(BINNAME)
 
-debug: ASLAGS += -g
+debug: ASFLAGS += -g
 debug: LDFLAGS += -g
 debug: $(BINNAME)
 
