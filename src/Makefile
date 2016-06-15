@@ -6,7 +6,7 @@ LD:=ld
 LDFLAGS:=-m elf_i386
 BINNAME=elaborato
 OBJ=main.o 
-HEADERS=
+HEADERS=syscall.inc
 RM=rm -rf
 ECHO=/bin/echo
 
@@ -22,8 +22,11 @@ $(BINNAME): $(OBJ)
 	@$(LD) -o $@ $^ $(LDFLAGS)
 	@$(ECHO) "[ ok ]"
 
-
 all: $(BINNAME)
+
+debug: ASLAGS += -g
+debug: LDFLAGS += -g
+debug: $(BINNAME)
 
 run: $(BINNAME)
 	@$(ECHO) "Running $(BINNAME)"
