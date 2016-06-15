@@ -1,6 +1,6 @@
 # file di definizione delle chiamate di sistema linux
 
-.equ SYS_EXIT, 0
+.equ SYS_EXIT, 1
 .equ SYS_READ, 3
 .equ SYS_WRITE, 4
 .equ SYS_OPEN, 5
@@ -10,4 +10,4 @@
 .equ STDOUT, 1
 .equ STDERR, 2
 
-.equ SYS_CALL, 0x80
+.equ SYSCALL, 0x80

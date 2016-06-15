@@ -19,11 +19,12 @@ output_filename: .asciz "output.txt"
 .text
 .global _start
 _start:
-    pushl %ebp
+    # NB: non salvo ebp in quanto non ha alcuna utilità farlo
+    # nella funzione start che comunque non ritorna
     movl %esp, %ebp
-
-    # codice della funzone
-    
-    movl %ebp, %esp
-    popl %ebp
-    ret
+	
+    # sys_exit(0); 
+    movl $SYS_EXIT, %eax
+    movl $0, %ebx
+    int $SYSCALL
+ 
