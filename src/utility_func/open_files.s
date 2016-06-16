@@ -1,6 +1,6 @@
-# file contenente la funzione che si occupa di aprire il file di input e di
+# file contenente la funzione che si occupa di aprire i file di input e di
 # output, i file descriptor vengono inseriti in variabili globali
-# si suppone che il nome dei due file siano salvati nell'indirizzi contenuti
+# si suppone che il nome dei due file siano salvati negli indirizzi contenuti
 # rispettivamente in %eax(input) ed in %ebx(output)
 .code32								# per indicare all' assemblatore di assemblare
 									# a 32 bit

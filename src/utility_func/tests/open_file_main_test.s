@@ -13,7 +13,11 @@
 
 		call 	_open_files
 
-		movl input_fd, %eax
-		movl output_fd, %ebx
+		movl 	input_fd, %eax
+		movl 	output_fd, %ebx
 
-		ret
+		call	_read_line
+
+		movl	$1, %eax
+		movl 	$0, %ebx
+		int		$0x80
