@@ -10,9 +10,11 @@
 .text
 input_filename: .asciz "input.txt"
 output_filename: .asciz "output.txt"
+usage: .asciz "usage: programName inputFilePath outputFilePath\n"
+.equ USAGE_LENGHT, .-usage
 .data
 #NB: per ora teniamo di default STDIN ed STDOUT, se uno non apre file
-input_fd: .long STDIN 
+input_fd: .long STDIN
 output_fd: .long STDOUT
 .bss
 last_state: .space 1
@@ -31,22 +33,33 @@ output_buff: .space OUTPUT_BUFFER_LEN
 .text
 .global _start
 _start:
+    # recupero i parametri del main
+    popl %eax   # numero parametri
+
+    # controllo argomenti
+    cmpl $3, %eax
+    jne  _show_usage
+
+    popl %eax   # nome programma
+    popl %eax   # primo parametro
+    popl %ebx   # secondo parametro
     # NB: non salvo ebp in quanto non ha alcuna utilità farlo
     # nella funzione start che comunque non ritorna
     movl %esp, %ebp
-	
+
+    call _open_files
+
     # cosa va implementato qua:
-    # 1) controllo e parsing degli argomenti della riga di comando
     # 2) apertura dei file, controllo corretta apertura dei file
-    # 3) entro un un loop in cui 
+    # 3) entro un un loop in cui
     #   a) leggo una riga dal file input, se EOF salto a 4
     #   b) elaboro la riga in una struttura dati da definire
     #   c) scelgo cosa fare in base allo stato precedente
-    #   d) scrivo una rida nel file di output 
+    #   d) scrivo una rida nel file di output
     # 4) chiudo tutti i file, esco dal programma correttamente
 
 _main_loop:
-    
+
     # sys_read(input_fd, input_buff, INPUT_BUFF_LEN)
     movl $SYS_READ, %eax
     movl input_fd, %ebx
@@ -66,8 +79,21 @@ _main_loop:
     int $SYSCALL
 
 _end:
-    # sys_exit(0); 
+    # sys_exit(0);
     movl $SYS_EXIT, %eax
     movl $0, %ebx
     int $SYSCALL
- 
+
+_show_usage:
+    # esce in caso di errore
+    # sys_write(stdout, usage, USAGE_LENGHT);
+    movl $SYS_WRITE, %eax
+    movl $STDOUT, %ebx
+    movl $usage, %ecx
+    movl $USAGE_LENGHT, %edx
+    int $SYSCALL
+
+    # sys_exit(1);
+    movl $SYS_EXIT, %eax
+    movl $1, %ebx
+    int $SYSCALL

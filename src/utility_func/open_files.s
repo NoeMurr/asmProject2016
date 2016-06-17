@@ -2,8 +2,8 @@
 # output, i file descriptor vengono inseriti in variabili globali
 # si suppone che il nome dei due file siano salvati negli indirizzi contenuti
 # rispettivamente in %eax(input) ed in %ebx(output)
-.code32								# per indicare all' assemblatore di assemblare
-									# a 32 bit
+.code32								# per indicare all' assemblatore di
+									# assemblare a 32 bit
 .include "../syscall.inc"
 .section .data
 	input_fd: .long 0 				# variabile globale che conterra' il file
@@ -12,6 +12,8 @@
 	output_fd:  .long 0 			# variabile globale che conterra' il file
 	                   				# descriptor del file di output
 .section .text
+	error_opening_files: .asciz "errore nell' apertura dei file\n"
+	.equ 	ERROR_OPENING_LENGHT: .-error
 	.globl 	_open_files 			# dichiaro la funzione globale
 	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
 
@@ -33,6 +35,9 @@ _open_files:
 	movl 	$0, %ecx 				# read-only mode
 	int 	$SYSCALL 				# apro il file
 
+	cmpl 	$0, %eax
+	jl		_error_opening_files
+
 	movl 	%eax, input_fd			# metto il file descriptor nella sua
 									# variabile
 
@@ -43,9 +48,25 @@ _open_files:
 	movl 	$2, %ecx 				# read and write, mode
 	int 	$SYSCALL 				# apro il file
 
+	cmpl 	$0, %eax
+	jl		_error_opening_files
+
 	movl 	%eax, output_fd			# metto il file descriptor nella sua
 									# variabile come prima
 
 	movl 	%ebp, %esp
   	popl	%ebp
-	ret 							# fine della funzione ed anche del file.
+	ret 							# ritorna al chiamante
+
+_error_opening_files:
+	# sys_write(stdout, usage, USAGE_LENGHT);
+	movl $SYS_WRITE, %eax
+	movl $STDOUT, %ebx
+	movl $error_opening_files, %ecx
+	movl $ERROR_OPENING_LENGHT, %edx
+	int $SYSCALL
+
+	# sys_exit(1);
+    movl $SYS_EXIT, %eax
+    movl $2, %ebx
+    int $SYSCALL
