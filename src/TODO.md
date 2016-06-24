@@ -8,3 +8,5 @@
 - muoversi a scrivere ulteriore codice prima che lo faccia qualcu'altro e vi tolga tutto il divertimento
 - finire l'elaborato
  
+# Ora che per ora avete fatto tutti gli esami, è il caso di pensare all'elaborato ? Mancano 2 settimante...
+### La prossima settimana va finito, e niente storie.
