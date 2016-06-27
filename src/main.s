@@ -15,16 +15,17 @@ input_fd: .long 0 				# variabile globale che conterra' il file
 
 output_fd:  .long 0 			# variabile globale che conterra' il file
                                 # descriptor del file di output
+init: .long 0
+reset: .long 0
+rpm: .long 0
+
+alm: .long 0
+numb: .long 0
+mod: .long 0
 
 .section .bss
 last_state: .space 1
 counter: .space 1
-
-.equ INPUT_BUFF_LEN, 9
-input_buff: .space INPUT_BUFF_LEN
-
-.equ OUTPUT_BUFF_LEN, 8
-output_buff: .space OUTPUT_BUFF_LEN
 
 
 
@@ -34,6 +35,10 @@ output_buff: .space OUTPUT_BUFF_LEN
     output_filename: .asciz "output.txt"
     .globl input_fd
     .globl output_fd
+    .globl init
+    .globl reset
+    .globl rpm
+
     usage: .asciz "usage: programName inputFilePath outputFilePath\n"
     .equ USAGE_LENGHT, .-usage
 
@@ -67,22 +72,37 @@ _start:
 _main_loop:
 
     # sys_read(input_fd, input_buff, INPUT_BUFF_LEN)
-    movl $SYS_READ, %eax
-    movl input_fd, %ebx
-    movl $input_buff, %ecx
-    movl $INPUT_BUFF_LEN, %edx
-    int $SYSCALL
 
-    # esco se EOF
-    testl %eax, %eax
-    jz _end
+    call _read_line
+
+    # EOF
+    cmpl $-1, %ebx
+    je _end
+
+    # COSEEE
+    cmpl    $0, init
+    je      _init_0
+
+    call    _check_rpm
+
+_init_0:
+    movl    $0, alm
+    movl    $0, numb
+    movl    $0, mod
+    call    _write_line
+    jmp     _main_loop
+
+
+    # FACCIAMO QUALCOSA QUI
+
+
 
     # sys_write(output_fd, output_buff, INPUT_BUFF_LEN)
-    movl $SYS_WRITE, %eax
-    movl $STDOUT, %ebx
-    movl $input_buff, %ecx
-    movl $INPUT_BUFF_LEN, %edx
-    int $SYSCALL
+    #movl $SYS_WRITE, %eax
+    #movl $STDOUT, %ebx
+    #movl $input_buff, %ecx
+    #movl $INPUT_BUFF_LEN, %edx
+    #int $SYSCALL
 
     jmp _main_loop
 

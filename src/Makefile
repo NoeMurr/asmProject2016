@@ -1,7 +1,7 @@
 # Makefile per il progetto assembly
 
 AS:=as
-ASFLAGS:=-32
+ASFLAGS:=-gstabs --32
 LD:=ld
 LDFLAGS:=-m elf_i386
 BINNAME=elaborato
