@@ -8,9 +8,6 @@
     .equ INPUT_BUFF_LEN, 9
     input_buff: .space INPUT_BUFF_LEN
 
-    .equ OUTPUT_BUFF_LEN, 8
-    output_buff: .space OUTPUT_BUFF_LEN
-
 .section .text
     .globl  _read_line
     .type   _read_line, @function

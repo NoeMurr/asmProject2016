@@ -5,18 +5,18 @@
 # Descrizione: converte un intero in stringa
 
 .text
-.global itoa
-.type itoa, @function
+.global _itoa
+.type _itoa, @function
 
 # Funzione che converte un intero in stringa
 # Prototipo C-style:
-#   uint32_t itoa(uint32_t val, char *string);
+#   u_int32_t itoa(uint32_t val, char *string);
 # Parametri di input: 
 #   EAX - Valore intero unsigned a 64bit da convertire 
 #   EDI - Puntatore alla stringa su cui salvare il risultato
 # Parametri di output:  
 #   EAX - Lunghezza della stringa convertita (compresiva di \0 finale)
-itoa: 
+_itoa: 
     movl $10, %ecx   # porto il fattore moltiplicativo in ECX
     movl %eax, %ebx  # salvo temporaneamente il valore di EAX in EBX
     xorl %esi, %esi  # azzero il registro ESI

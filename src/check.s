@@ -16,7 +16,7 @@ _check:
     jle     _opt
 
 _fg:
-    movl    $3, %eax        # Nuova mo
+    movl    $3, %eax        # Nuova mod
     cmpl    $1, reset
     je      _reset_numb
 
