@@ -24,12 +24,12 @@ _atoi:
 
 _atoi_loop:
 	xorl %ebx, %ebx
-	movb (%edi), %ebx  # sposto un byte dalla stringa in BL
-	subb $48, %ebx     # sottraggo il valore ASCII dello 0 a BL, per avere un valore intero
+	movb (%edi), %bl  # sposto un byte dalla stringa in BL
+	subb $48, %bl     # sottraggo il valore ASCII dello 0 a BL, per avere un valore intero
 
-	cmpb $0, %ebx      # Se il numero è minore di 0
+	cmpb $0, %bl      # Se il numero è minore di 0
 	jl _atoi_end      # allora esco dal ciclo
-	cmpb $10, %ebx     # Se il numero è maggiore o uguale a 10
+	cmpb $10, %bl     # Se il numero è maggiore o uguale a 10
 	jge _atoi_end     # esco dal ciclo
 
 	mull %ecx         # altrimenti moltiplico EAX per 10 (10 messo precedentemente in ECX)
