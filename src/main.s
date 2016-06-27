@@ -38,6 +38,9 @@ counter: .space 1
     .globl init
     .globl reset
     .globl rpm
+    .globl alm
+    .globl numb
+    .globl mod
 
     usage: .asciz "usage: programName inputFilePath outputFilePath\n"
     .equ USAGE_LENGHT, .-usage
@@ -73,24 +76,17 @@ _main_loop:
 
     # sys_read(input_fd, input_buff, INPUT_BUFF_LEN)
 
-    call _read_line
+    call    _read_line
 
     # EOF
     cmpl $-1, %ebx
     je _end
 
     # COSEEE
-    cmpl    $0, init
-    je      _init_0
+    call    _check
 
-    call    _check_rpm
+    # call    _write_line
 
-_init_0:
-    movl    $0, alm
-    movl    $0, numb
-    movl    $0, mod
-    call    _write_line
-    jmp     _main_loop
 
 
     # FACCIAMO QUALCOSA QUI
