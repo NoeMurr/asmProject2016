@@ -5,12 +5,7 @@
 .code32								# per indicare all' assemblatore di
 									# assemblare a 32 bit
 .include "../syscall.inc"
-.section .data
-	input_fd: .long 0 				# variabile globale che conterra' il file
-									# descriptor del file di input
 
-	output_fd:  .long 0 			# variabile globale che conterra' il file
-	                   				# descriptor del file di output
 .section .text
 	error_opening_files: .asciz "errore nell' apertura dei file\n"
 	.equ 	ERROR_OPENING_LENGHT: .-error

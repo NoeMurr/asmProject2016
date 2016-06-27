@@ -17,20 +17,13 @@ _read_line:
     pushl	%ebp
     movl 	%esp, %ebp
 
-    pushl   %ebx                    # pusho il descrittore dell'output
-
-    movl    %eax, %ebx              # metto il descrittore dell'input in ebx
+    movl    input_fd, %ebx              # metto il descrittore dell'input in ebx
 
     movl    $SYS_READ, %eax
     leal    line, %ecx
     movl    buff_size, %edx
     int     $SYSCALL
 
-    movl    $SYS_WRITE, %eax
-	movl    $STDOUT, %ebx
-	int     $SYSCALL		
-
-    movl    %ebx, %eax
     popl    %ebx
 
     movl    %ebp, %esp

@@ -14,8 +14,11 @@ usage: .asciz "usage: programName inputFilePath outputFilePath\n"
 .equ USAGE_LENGHT, .-usage
 .data
 #NB: per ora teniamo di default STDIN ed STDOUT, se uno non apre file
-input_fd: .long STDIN
-output_fd: .long STDOUT
+input_fd: .long 0 				# variabile globale che conterra' il file
+                                # descriptor del file di input
+
+output_fd:  .long 0 			# variabile globale che conterra' il file
+                                # descriptor del file di output
 .bss
 last_state: .space 1
 counter: .space 1
@@ -24,8 +27,8 @@ counter: .space 1
 .equ INPUT_BUFF_LEN, 9
 input_buff: .space INPUT_BUFF_LEN
 
-.equ OUTPUT_BUFFER_LEN, 8
-output_buff: .space OUTPUT_BUFFER_LEN
+.equ OUTPUT_BUFF_LEN, 8
+output_buff: .space OUTPUT_BUFF_LEN
 
 
 
