@@ -4,6 +4,8 @@
 # Autori: Alessandro Righi, Noè Murr, Mirko Morati
 # Descrizione: funzione che converte una stringa in intero
 
+.code32
+
 .text
 .global atoi
 .type atoi, @function
@@ -29,9 +31,9 @@ _atoi_loop:
 	cmpb $10, %bl     # Se il numero è maggiore o uguale a 10
 	jge _atoi_end     # esco dal ciclo
 
-	mulq %ecx         # altrimenti moltiplico EAX per 10 (10 messo precedentemente in ECX)
-	addq %ebx, %eax   # aggiungo a EAX il valore attuale
-	incq %edi         # incremento EDI
+	mull %ecx         # altrimenti moltiplico EAX per 10 (10 messo precedentemente in ECX)
+	addl %ebx, %eax   # aggiungo a EAX il valore attuale
+	incl %edi         # incremento EDI
 
 	jmp _atoi_loop    # rieseguo il ciclo
 

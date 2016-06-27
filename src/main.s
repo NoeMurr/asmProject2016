@@ -7,22 +7,18 @@
 .include "syscall.inc"
 
 # variabili globali
-.text
-input_filename: .asciz "input.txt"
-output_filename: .asciz "output.txt"
-usage: .asciz "usage: programName inputFilePath outputFilePath\n"
-.equ USAGE_LENGHT, .-usage
-.data
+
+.section .data
 #NB: per ora teniamo di default STDIN ed STDOUT, se uno non apre file
 input_fd: .long 0 				# variabile globale che conterra' il file
                                 # descriptor del file di input
 
 output_fd:  .long 0 			# variabile globale che conterra' il file
                                 # descriptor del file di output
-.bss
+
+.section .bss
 last_state: .space 1
 counter: .space 1
-
 
 .equ INPUT_BUFF_LEN, 9
 input_buff: .space INPUT_BUFF_LEN
@@ -33,8 +29,15 @@ output_buff: .space OUTPUT_BUFF_LEN
 
 
 # codice del programma
-.text
-.global _start
+.section .text
+    input_filename: .asciz "input.txt"
+    output_filename: .asciz "output.txt"
+    .globl input_fd
+    .globl output_fd
+    usage: .asciz "usage: programName inputFilePath outputFilePath\n"
+    .equ USAGE_LENGHT, .-usage
+
+.globl _start
 _start:
     # recupero i parametri del main
     popl %eax   # numero parametri
@@ -76,10 +79,12 @@ _main_loop:
 
     # sys_write(output_fd, output_buff, INPUT_BUFF_LEN)
     movl $SYS_WRITE, %eax
-    movl output_fd, %ebx
-    movl $output_buff, %ecx
-    movl $OUTPUT_BUFF_LEN, %edx
+    movl $STDOUT, %ebx
+    movl $input_buff, %ecx
+    movl $INPUT_BUFF_LEN, %edx
     int $SYSCALL
+
+    jmp _main_loop
 
 _end:
     # sys_exit(0);

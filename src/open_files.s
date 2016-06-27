@@ -4,16 +4,13 @@
 # rispettivamente in %eax(input) ed in %ebx(output)
 .code32								# per indicare all' assemblatore di
 									# assemblare a 32 bit
-.include "../syscall.inc"
+.include "syscall.inc"
 
 .section .text
 	error_opening_files: .asciz "errore nell' apertura dei file\n"
-	.equ 	ERROR_OPENING_LENGHT: .-error
+	.equ 	ERROR_OPENING_LENGHT, .-error_opening_files
 	.globl 	_open_files 			# dichiaro la funzione globale
 	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
-
-	.globl 	input_fd 				# dichiaro la variabile come globale
-	.globl 	output_fd 				# dichiaro la variabile come globale
 
 _open_files:
 

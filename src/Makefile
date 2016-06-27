@@ -5,12 +5,12 @@ ASFLAGS:=-32
 LD:=ld
 LDFLAGS:=-m elf_i386
 BINNAME=elaborato
-OBJ=main.o 
+OBJ=main.o open_files.o read_line.o atoi.o itoa.o
 HEADERS=syscall.inc
 RM=rm -rf
 ECHO=/bin/echo
 
-.PHONY: all run clean rebuild help 
+.PHONY: all run clean rebuild help
 
 %.o: %.s $(HEADERS)
 	@$(ECHO) -n "Compiling $< 	"

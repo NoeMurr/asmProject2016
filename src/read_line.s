@@ -2,7 +2,7 @@
 
 .code32								# per indicare all' assemblatore di assemblare
 									# a 32 bit
-.include "../syscall.inc"
+.include "syscall.inc"
 .section .data
     buff_size:  .long 9
 .section .bss
