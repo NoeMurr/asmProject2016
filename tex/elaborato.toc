@@ -1,0 +1,6 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}Descrizione del progetto}{3}
+\contentsline {section}{\numberline {2}Variabili}{3}
+\contentsline {section}{\numberline {3}Funzioni}{3}
+\contentsline {subsection}{\numberline {3.1}main.s}{3}
