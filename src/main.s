@@ -15,24 +15,21 @@ input_fd: .long 0 				# variabile globale che conterra' il file
 
 output_fd:  .long 0 			# variabile globale che conterra' il file
                                 # descriptor del file di output
-init: .long 0
-reset: .long 0
+
+# Variabili globali per i segnali di input 
+init: .long 0                                                                 
+reset: .long 0                  
 rpm: .long 0
 
+# Variabili globali per i sengali di output 
 alm: .long 0
 numb: .long 0
 mod: .long 0
 
 .section .bss
-last_state: .space 1
-counter: .space 1
-
-
 
 # codice del programma
 .section .text
-    input_filename: .asciz "input.txt"
-    output_filename: .asciz "output.txt"
     .globl input_fd
     .globl output_fd
     .globl init
@@ -41,65 +38,49 @@ counter: .space 1
     .globl alm
     .globl numb
     .globl mod
+    .globl _start
 
-    usage: .asciz "usage: programName inputFilePath outputFilePath\n"
+    # Stringa per mostrare l'utilizzo del programma in caso di parametri errati
+    usage: .asciz "usage: programName inputFilePath outputFilePath\n"     
     .equ USAGE_LENGHT, .-usage
 
-.globl _start
 _start:
     # recupero i parametri del main
     popl %eax   # numero parametri
 
-    # controllo argomenti
+    # Controllo argomenti se sbagliati mostro l'utilizzo corretto
     cmpl $3, %eax
     jne  _show_usage
 
     popl %eax   # nome programma
     popl %eax   # primo parametro
     popl %ebx   # secondo parametro
+
     # NB: non salvo ebp in quanto non ha alcuna utilità farlo
     # nella funzione start che comunque non ritorna
     movl %esp, %ebp
 
+    # Apertura dei file 
     call _open_files
 
-    # cosa va implementato qua:
-    # 2) apertura dei file, controllo corretta apertura dei file
-    # 3) entro un un loop in cui
-    #   a) leggo una riga dal file input, se EOF salto a 4
-    #   b) elaboro la riga in una struttura dati da definire
-    #   c) scelgo cosa fare in base allo stato precedente
-    #   d) scrivo una rida nel file di output
     # 4) chiudo tutti i file, esco dal programma correttamente
 
 _main_loop:
 
-    # sys_read(input_fd, input_buff, INPUT_BUFF_LEN)
-
+    # Leggiamo la riga 
     call    _read_line
 
-    # EOF
+    # Caso EOF
     cmpl $-1, %ebx
     je _end
 
-    # COSEEE
+    # Controllo delle variabili 
     call    _check
 
+    # Scrittura della riga di output su file 
     call    _write_line
 
-
-
-    # FACCIAMO QUALCOSA QUI
-
-
-
-    # sys_write(output_fd, output_buff, INPUT_BUFF_LEN)
-    #movl $SYS_WRITE, %eax
-    #movl $STDOUT, %ebx
-    #movl $input_buff, %ecx
-    #movl $INPUT_BUFF_LEN, %edx
-    #int $SYSCALL
-
+    # Leggi un altra riga fino che non trovi la fine del file
     jmp _main_loop
 
 _end:

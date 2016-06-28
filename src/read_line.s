@@ -1,6 +1,6 @@
 # Funzione che legge una riga alla volta del file di input
 
-.code32								# per indicare all' assemblatore di assemblare
+.code32								# Per indicare all' assemblatore di assemblare
 									# a 32 bit
 .include "syscall.inc"
 
@@ -17,17 +17,20 @@ _read_line:
     pushl	%ebp
     movl 	%esp, %ebp
 
-    movl    input_fd, %ebx              # metto il descrittore dell'input in ebx
+    # Lettura riga 
 
-    movl    $SYS_READ, %eax
+    # sys_read(input_fd, input_buff, INPUT_BUFF_LEN);
+    movl    input_fd, %ebx
+    movl    $SYS_READ, %eax 
     leal    input_buff, %ecx
     movl    $INPUT_BUFF_LEN, %edx
     int     $SYSCALL
 
-    # Estraggo valori da input_buff
+    # Controllo EOF
     cmpl    $0, %eax                    # Se eax == 0 eof
     je      _eof
 
+    # Estrazione valori dalla stringa
     leal    input_buff, %edi
     call    _atoi
     movl    %eax, init
@@ -48,7 +51,7 @@ _read_line:
     ret
 
 _eof:
-
+    # in caso di EOF %ebx = -1
     movl    %ebp, %esp
     popl    %ebp
 
