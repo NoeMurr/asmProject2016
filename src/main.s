@@ -42,7 +42,7 @@ mod: .long 0
 
     # Stringa per mostrare l'utilizzo del programma in caso di parametri errati
     usage: .asciz "usage: programName inputFilePath outputFilePath\n"     
-    .equ USAGE_LENGHT, .-usage
+    .equ USAGE_LENGTH, .-usage
 
 _start:
     # recupero i parametri del main
@@ -84,6 +84,9 @@ _main_loop:
     jmp _main_loop
 
 _end:
+    
+    call _close_files
+
     # sys_exit(0);
     movl $SYS_EXIT, %eax
     movl $0, %ebx
@@ -91,11 +94,11 @@ _end:
 
 _show_usage:
     # esce in caso di errore
-    # sys_write(stdout, usage, USAGE_LENGHT);
+    # sys_write(stdout, usage, USAGE_LENGTH);
     movl $SYS_WRITE, %eax
     movl $STDOUT, %ebx
     movl $usage, %ecx
-    movl $USAGE_LENGHT, %edx
+    movl $USAGE_LENGTH, %edx
     int $SYSCALL
 
     # sys_exit(1);
