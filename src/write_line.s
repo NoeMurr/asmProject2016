@@ -12,10 +12,10 @@
 .section .text
     .globl  _write_line
     .type   _write_line, @function
-    MOD_00: .ascii "00"
-    MOD_01: .ascii "01"
-    MOD_10: .ascii "10"
-    MOD_11: .ascii "11"
+    MOD_00: .ascii "00"             # motore spento 
+    MOD_01: .ascii "01"             # motore sotto giri
+    MOD_10: .ascii "10"             # motore in stato ottimale 
+    MOD_11: .ascii "11"             # motore fuori giri
     .equ MOD_LEN, 2
 
 _write_line:
@@ -23,9 +23,9 @@ _write_line:
     pushl   %ebp
     movl    %esp, %ebp
 
-    leal    output_buff, %edi
+    leal    output_buff, %edi       # spostiamo il puntatore del buffer di output in EDI 
 
-    cmpl    $1, alm
+    cmpl    $1, alm                 # se l'allarme e' stampiamo 1 altrimenti 0 senza chiamare funzioni 
     je      _alm_1
 
 _alm_0:
@@ -36,11 +36,11 @@ _alm_1:
 
 _print_mod:
 
-    movl    $44, 1(%edi)
-    addl    $2, %edi
+    movl    $44, 1(%edi)            # aggiungiamo la virgola dopo il segnale di allarme  
+    addl    $2, %edi                # spostiamo un immaginario cursore nella posizione dove stampare la mod
 
-    cmpl    $1, mod
-    je      _mod_1
+    cmpl    $1, mod                 # controlliamo il valore di mod e stampiamo la stringa corretta
+    je      _mod_1                  # in base alla giusta modalita' di funzionamento
     cmpl    $2, mod
     je      _mod_2
     cmpl    $3, mod
@@ -62,25 +62,25 @@ _mod_3:
     movl    MOD_11, %eax
 
 _end_print_mod:
-    movl    %eax, (%edi)
-    addl    $MOD_LEN, %edi
-    movl    $44, (%edi)
-    incl    %edi
+    movl    %eax, (%edi)            # mettiamo la stringa giusta nell' output_buff ricordando che prima
+    addl    $MOD_LEN, %edi          # spostato il cursore (la posizione di edi) nel punto esatto dove scrivere  
+    movl    $44, (%edi)             # aggiungiamo la virgola
+    incl    %edi                    # spostiamo il cursore
 
 
-    cmpl    $10, numb
-    jl      _numb_one_digit
+    cmpl    $10, numb               # controlliamo se il numero di secondi e' ad una sola cifra in tal caso 
+    jl      _numb_one_digit         # saltiamo in un punto in cui aggiungiamo uno 0 davanti al numero
 
 _print_numb:
 
-    movl    numb, %eax
+    movl    numb, %eax              # prepariamo la chiamata per itoa 
 
-    call    _itoa
+    call    _itoa                   # chiamiamo itoa 
 
 
-    leal    output_buff, %edi
-    addl    $7, %edi
-    movl    $10, (%edi)
+    leal    output_buff, %edi       # ricarichiamo il puntatore di output_buff in edi 
+    addl    $7, %edi                # e ci aggiungiamo 7 per arrivare alla fine della stringa 
+    movl    $10, (%edi)             # punto nel quale aggiungiamo un \n 
 
     movl    $SYS_WRITE, %eax
     movl    output_fd, %ebx
