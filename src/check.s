@@ -27,7 +27,7 @@ _fg:
     movl    %eax, mod
 
     cmpl    $15, numb
-    jg      _set_alm
+    jge      _set_alm
 
     ret
 

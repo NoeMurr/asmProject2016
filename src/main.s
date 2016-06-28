@@ -85,7 +85,7 @@ _main_loop:
     # COSEEE
     call    _check
 
-    # call    _write_line
+    call    _write_line
 
 
 

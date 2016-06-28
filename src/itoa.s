@@ -11,17 +11,17 @@
 # Funzione che converte un intero in stringa
 # Prototipo C-style:
 #   u_int32_t itoa(uint32_t val, char *string);
-# Parametri di input: 
-#   EAX - Valore intero unsigned a 64bit da convertire 
+# Parametri di input:
+#   EAX - Valore intero unsigned a 64bit da convertire
 #   EDI - Puntatore alla stringa su cui salvare il risultato
-# Parametri di output:  
+# Parametri di output:
 #   EAX - Lunghezza della stringa convertita (compresiva di \0 finale)
-_itoa: 
+_itoa:
     movl $10, %ecx   # porto il fattore moltiplicativo in ECX
     movl %eax, %ebx  # salvo temporaneamente il valore di EAX in EBX
     xorl %esi, %esi  # azzero il registro ESI
 
-_itoa_dividi: 
+_itoa_dividi:
     xorl %edx, %edx  # azzero EDX per fare la divisione
     divl %ecx        # divide EAX per ECX, salva il resto in EDX
     incl %esi        # incrementa il contatore
@@ -47,4 +47,4 @@ _itoa_converti:
 
     movl %ebx, %eax  # porto il valore della lunghezza della stringa in EAX per ritornarlo
     incl %eax    # incremento di 1 EAX (in modo da includere il \0)
-    ret 
+    ret
