@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  28 JUN 2016 22:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  28 JUN 2016 23:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1130,6 +1130,12 @@ LaTeX Font Info:    Try loading font information for T1+zi4 on input line 131.
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
 
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.59999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[3] 
 AED: lastpage setting LastPage
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1137,18 +1143,18 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[3] (./elaborato.aux) ) 
+[4] (./elaborato.aux) ) 
 Here is how much of TeX's memory you used:
  25745 strings out of 493089
  505133 string characters out of 6134843
- 663837 words of memory out of 5000000
+ 665837 words of memory out of 5000000
  28798 multiletter control sequences out of 15000+600000
  17209 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,66p,10419b,627s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-s
-uper/cm-super-t1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-sup
-er/cm-super-ts1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/inconso
+uper/cm-super-ts1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-su
+per/cm-super-t1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/inconso
 lata/i4-t1-0.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/inconso
 lata/Inconsolata-zi4r.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
 c/cm-super/sfbx1095.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
@@ -1160,10 +1166,10 @@ er/sfrm1095.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super
 fsl1095.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sft
 i1095.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1
 200.pfb>
-Output written on elaborato.pdf (3 pages, 147745 bytes).
+Output written on elaborato.pdf (4 pages, 166175 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 65 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -130,20 +130,38 @@
 	\section{Descrizione del progetto}
 	Si vuole realizzare un programma \Assembly per il monitoraggio di un motore a combustione interna il quale, ricevuto come ingresso il numero di giri/minuto del motore, fornisca in uscita la modalità di funzionamento corrente del motore: \textit{Sotto Giri, Ottimale, Fuori Giri}. Il programma deve contare e visualizzare in uscita il numero dei secondi trascorsi nella modalità di funzionamento attuale ed inoltre attivare il segnale di allarme nel caso in cui il motore si trovi in modalità \textit{Fuori Giri} da più di 15 secondi.
 	
-	\section{Variabili}
+	
+	\section{File}
+	Di seguito verranno descritte le funzioni presenti in ogni file del programma, etichette, eventuali variabili e loro scopo. 
+	
+	\subsection{syscall.inc}
+	Header file contenente la definizione di alcune costanti, tramite la pseudo-operazione \texttt{.equ}, relative alle chiamate di sistema e ad alcuni standard utilizzati in tutti i file e riportati di seguito:
 	\begin{itemize}
-		\item \texttt{input\_fd}: Contiene il descrittore del file di input;
-		\item \texttt{output\_fd}: Contiene il descrittore del file di output;
-		\item \texttt{init}: Contiene il valore del segnale INIT corrente;
-		\item \texttt{reset}: Contiene il valore del segnale RESET corrente;
-		\item \texttt{rpm}: Contiene il valore del segnale RPM corrente;
-		\item \texttt{alm}: Contiene il valore del segnale ALM corrente;
-		\item \texttt{mod}: Contiene il valore del segnale MOD corrente;
-		\item \texttt{numb}: Contiene il valore del segnale NUMB corrente;
+		\item 
 	\end{itemize}
-	
-	
-	\section{Funzioni}
-	
 	\subsection{main.s}
+	File principale del programma. 
+		\subsubsection{Variabili Globali}
+		\begin{itemize}
+			\item \texttt{input\_fd}: Contiene il descrittore del file di input;
+			\item \texttt{output\_fd}: Contiene il descrittore del file di output;
+			\item \texttt{init}: Contiene il valore del segnale INIT corrente;
+			\item \texttt{reset}: Contiene il valore del segnale RESET corrente;
+			\item \texttt{rpm}: Contiene il valore del segnale RPM corrente;
+			\item \texttt{alm}: Contiene il valore del segnale ALM corrente;
+			\item \texttt{mod}: Contiene il valore del segnale MOD corrente;
+			\item \texttt{numb}: Contiene il valore del segnale NUMB corrente.
+		\end{itemize}
+		\subsubsection{Variabili Locali}
+	\begin{itemize}
+		\item \texttt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
+		\item \texttt{USAGE\_LENGTH}: Costante necessaria per la stampa della stringa.
+	\end{itemize}
+		\subsubsection{Funzioni e Etichette}
+	\begin{itemize}
+		\item \texttt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
+		\item \texttt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
+		\item \texttt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
+		\item \texttt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
+	\end{itemize}  
 \end{document}
