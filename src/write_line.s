@@ -6,7 +6,7 @@
 
 .section .bss
 
-    .equ OUTPUT_BUFF_LEN, 9
+    .equ OUTPUT_BUFF_LEN, 8
     output_buff: .space OUTPUT_BUFF_LEN
 
 .section .text
@@ -24,14 +24,20 @@ _write_line:
     movl    %esp, %ebp
 
     leal    output_buff, %edi
-    movl    alm, %eax
 
-    call    _itoa
+    cmpl    $1, alm
+    je      _alm_1
 
-    leal    output_buff, %edi
-    addl    %eax, %edi
-    movl    $44, (%edi)
-    incl    %edi
+_alm_0:
+    movl    $48, (%edi)
+    jmp     _print_mod
+_alm_1:
+    movl    $49, (%edi)
+
+_print_mod:
+
+    movl    $44, 1(%edi)
+    addl    $2, %edi
 
     cmpl    $1, mod
     je      _mod_1
@@ -40,34 +46,32 @@ _write_line:
     cmpl    $3, mod
     je      _mod_3
 
-    #_mod_0
+_mod_0:
     movl    MOD_00, %eax
-    movl    %eax, (%edi)
-    jmp _print_numb
+    jmp _end_print_mod
 
 _mod_1:
     movl    MOD_01, %eax
-    movl    %eax, (%edi)
-    jmp _print_numb
+    jmp _end_print_mod
 
 _mod_2:
     movl    MOD_10, %eax
-    movl    %eax, (%edi)
-    jmp _print_numb
+    jmp _end_print_mod
 
 _mod_3:
     movl    MOD_11, %eax
-    movl    %eax, (%edi)
 
-_print_numb:
-    addl    $2, %edi
+_end_print_mod:
+    movl    %eax, (%edi)
+    addl    $MOD_LEN, %edi
     movl    $44, (%edi)
     incl    %edi
+
 
     cmpl    $10, numb
     jl      _numb_one_digit
 
-_print_numb_2:
+_print_numb:
 
     movl    numb, %eax
 
@@ -75,9 +79,8 @@ _print_numb_2:
 
 
     leal    output_buff, %edi
-    addl    $8, %edi
+    addl    $7, %edi
     movl    $10, (%edi)
-    incl    %edi
 
     movl    $SYS_WRITE, %eax
     movl    output_fd, %ebx
@@ -94,4 +97,4 @@ _print_numb_2:
 _numb_one_digit:
     movl    $48, (%edi)
     incl    %edi
-    jmp     _print_numb_2
+    jmp     _print_numb
