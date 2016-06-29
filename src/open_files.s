@@ -2,63 +2,65 @@
 # output, i file descriptor vengono inseriti in variabili globali
 # si suppone che il nome dei due file siano salvati negli indirizzi contenuti
 # rispettivamente in %eax(input) ed in %ebx(output)
-.code32								# per indicare all' assemblatore di
-									# assemblare a 32 bit
 .include "syscall.inc"
 
 .section .text
-	error_opening_files: .asciz "errore nell' apertura dei file\n"
-	.equ 	ERROR_OPENING_LENGHT, .-error_opening_files
-	.globl 	_open_files 			# dichiaro la funzione globale
-	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
+    # variabili globali costanti
+    error_opening_files: .asciz "Errore nell' apertura dei file\n"
+    .equ    ERROR_OPENING_LENGHT, .-error_opening_files
 
+# funzione open files, apre i file e gestisce eventuali errori nell'apertura    
+# parametri della funzione
+# EDI -> puntatore alla stringa del nome file input
+# ESI -> puntatore alla stringa del nome file output
+# Prototipo C-style
+# void open_files(const char *input_filename, const char *output_filename);
+# la funzione modifica la variabili globali input_fd ed output_fd (sta cosa non 
+# mi piace comunque, però)
+.globl  _open_files             # dichiaro la funzione globale
+.type   _open_files, @function  # dichiaro l' etichetta come una funzione
 _open_files:
 
-	pushl	%ebp
-	movl 	%esp, %ebp
+    ## result = sys_open(input_filename, O_READ);
+    movl    $SYS_OPEN, %eax
+    movl    %edi, %ebx
+    movl    $0, %ecx
+    int     $SYSCALL
 
-	pushl	%ebx 			 		# pusho l' indirizzo del file di output sullo
-									# stack
+    ## if (result <= 0) goto _error_opening_files;
+    cmpl    $0, %eax
+    jle      _error_opening_files
 
-	movl 	%eax, %ebx 				# sposto l' indirizzo del file che vado
-									# ad aprire in %ebx
+    ## input_fd = result;
+    movl    %eax, input_fd
 
-	movl 	$SYS_OPEN, %eax 		# chiamata di sistema open
-	movl 	$0, %ecx 				# read-only mode
-	int 	$SYSCALL 				# apro il file
+    ## result = sys_open(output_filename, O_WRITE | O_CREAT, 0744);
+    movl    $SYS_OPEN, %eax
+    movl    %esi, %ebx
+    movl    $65, %ecx
+    movl    $0744, %edx
+    int     $SYSCALL
 
-	cmpl 	$0, %eax
-	jl		_error_opening_files
+    ## if (result <= 0) goto _error_opening_files
+    cmpl    $0, %eax
+    jl      _error_opening_files
 
-	movl 	%eax, input_fd			# metto il file descriptor nella sua
-									# variabile
+    ## output_fd = result;
+    movl    %eax, output_fd         
 
-	popl 	%ebx 					# riprendo l' indirizzo del nome del file
-									# di output che avevo messo sullo stack
+    ret
 
-	movl 	$SYS_OPEN, %eax 		# chiamata di sistema open
-	movl 	$2, %ecx 				# read and write, mode
-	int 	$SYSCALL 				# apro il file
-
-	cmpl 	$0, %eax
-	jl		_error_opening_files
-
-	movl 	%eax, output_fd			# metto il file descriptor nella sua
-									# variabile come prima
-
-	movl 	%ebp, %esp
-  	popl	%ebp
-	ret 							# ritorna al chiamante
-
+# piccola label che gestisce l'uscita in caso di errore.
 _error_opening_files:
-	# sys_write(stdout, usage, USAGE_LENGHT);
-	movl $SYS_WRITE, %eax
-	movl $STDOUT, %ebx
-	movl $error_opening_files, %ecx
-	movl $ERROR_OPENING_LENGHT, %edx
-	int $SYSCALL
 
-	# sys_exit(1);
+    ## sys_write(stdout, usage, USAGE_LENGHT);
+    movl $SYS_WRITE, %eax
+    movl $STDOUT, %ebx
+    movl $error_opening_files, %ecx
+    movl $ERROR_OPENING_LENGHT, %edx
+    int $SYSCALL
+
+    ## sys_exit(1);
     movl $SYS_EXIT, %eax
     movl $2, %ebx
     int $SYSCALL

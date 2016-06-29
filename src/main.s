@@ -30,15 +30,15 @@ mod: .long 0
 
 # codice del programma
 .section .text
-    .globl input_fd
-    .globl output_fd
-    .globl init
-    .globl reset
-    .globl rpm
-    .globl alm
-    .globl numb
-    .globl mod
-    .globl _start
+    .globl input_fd   # troppe
+    .globl output_fd  # variabili
+    .globl init       # globali
+    .globl reset      # non
+    .globl rpm        # vanno
+    .globl alm        # affatto
+    .globl numb       # bene
+    .globl mod        # cattiva
+    .globl _start     # programmazione
 
     # Stringa per mostrare l'utilizzo del programma in caso di parametri errati
     usage: .asciz "usage: programName inputFilePath outputFilePath\n"     
@@ -60,7 +60,10 @@ _start:
     # nella funzione start che comunque non ritorna
     movl %esp, %ebp
 
-    # Apertura dei file 
+    # Apertura dei file
+    ## open_files(input_filename, output_filename); 
+    movl %eax, %edi
+    movl %ebx, %esi
     call _open_files
 
     # 4) chiudo tutti i file, esco dal programma correttamente
