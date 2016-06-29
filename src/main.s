@@ -45,28 +45,22 @@ mod: .long 0
     .equ USAGE_LENGTH, .-usage
 
 _start:
-    # recupero i parametri del main
-    popl %eax   # numero parametri
-
-    # Controllo argomenti se sbagliati mostro l'utilizzo corretto
-    cmpl $3, %eax
-    jne  _show_usage
-
-    popl %eax   # nome programma
-    popl %eax   # primo parametro
-    popl %ebx   # secondo parametro
-
-    # NB: non salvo ebp in quanto non ha alcuna utilità farlo
-    # nella funzione start che comunque non ritorna
     movl %esp, %ebp
 
-    # Apertura dei file
-    ## open_files(input_filename, output_filename); 
-    movl %eax, %edi
-    movl %ebx, %esi
-    call _open_files
+    # Composizione stack:
+    # (%ebp)   - argc
+    # 4(%ebp)  - argv[0] - nome eseguibile
+    # 8(%ebp)  - argv[1] - file di input
+    # 12(%ebp) - argv[2] - file di output
 
-    # 4) chiudo tutti i file, esco dal programma correttamente
+    ## if (argc < 3) goto _show_usage
+    cmpl $3, (%ebp)
+    jne  _show_usage
+
+    ## open_files(argv[1], argv[2]); 
+    movl 8(%ebp), %edi
+    movl 12(%ebp), %esi
+    call _open_files
 
 _main_loop:
 
