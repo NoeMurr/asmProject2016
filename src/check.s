@@ -1,18 +1,10 @@
 # Funzione che controlla le variabili init, reset, rpm e setta le variabili 
 # alm, mod e numb
 
-.code32
-
-.section .data
-
-.section .text
-    .globl  _check
-    .type   _check, @function
-
-_check:
-    
-    pushl   %ebp
-    movl    %esp, %ebp
+.text
+.globl  check
+.type   check, @function
+check:
 
     # Caso init == 0 -> alm =0; mod = 0; numb = 0;
     cmpl    $0, init
@@ -97,9 +89,6 @@ _end_check:
     # Se il numero di secondi supera i 99 allora dobbiamo ricominciare il conteggio
     cmpl    $99, numb 
     jg      _numb_overflow
-    movl    %ebp, %esp
-    popl    %ebp
-
     ret
 
 _numb_overflow:

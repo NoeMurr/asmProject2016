@@ -1,22 +1,14 @@
 # Funzione che legge una riga alla volta del file di input
-
-.code32								# Per indicare all' assemblatore di assemblare
-									# a 32 bit
 .include "syscall.inc"
 
-.section .bss
+.bss
     .equ INPUT_BUFF_LEN, 9
     input_buff: .space INPUT_BUFF_LEN
 
-.section .text
-    .globl  _read_line
-    .type   _read_line, @function
-
-_read_line:
-
-    pushl	%ebp
-    movl 	%esp, %ebp
-
+.text
+.globl  read_line
+.type   read_line, @function
+read_line:
     # Lettura riga 
 
     # sys_read(input_fd, input_buff, INPUT_BUFF_LEN);
@@ -43,17 +35,10 @@ _read_line:
     call    _atoi
     movl    %eax, rpm
 
-
-    movl    %ebp, %esp
-    popl    %ebp
-
     xorl    %ebx, %ebx
     ret
 
 _eof:
     # in caso di EOF %ebx = -1
-    movl    %ebp, %esp
-    popl    %ebp
-
     movl    $-1, %ebx
     ret

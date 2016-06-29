@@ -4,49 +4,45 @@
 # rispettivamente in %eax(input) ed in %ebx(output)
 .include "syscall.inc"
 
-.section .text
+.text
     # variabili globali costanti
     error_opening_files: .asciz "Errore nell' apertura dei file\n"
-    .equ    ERROR_OPENING_LENGHT, .-error_opening_files
+    .equ ERROR_OPENING_LENGHT, .-error_opening_files
 
 # funzione open files, apre i file e gestisce eventuali errori nell'apertura    
 # parametri della funzione
 # EDI -> puntatore alla stringa del nome file input
 # ESI -> puntatore alla stringa del nome file output
 # Prototipo C-style
-# void open_files(const char *input_filename, const char *output_filename);
-# la funzione modifica la variabili globali input_fd ed output_fd (sta cosa non 
-# mi piace comunque, però)
-.globl  _open_files             # dichiaro la funzione globale
-.type   _open_files, @function  # dichiaro l' etichetta come una funzione
-_open_files:
+# (FILE, FILE) open_files(const char *input_filename, const char *output_filename);
+# Ritorna rispettivamente in EDI ed ESI l'fd del file input e del file output
+.globl open_files             # dichiaro la funzione globale
+.type open_files, @function  # dichiaro l' etichetta come una funzione
+open_files:
 
-    ## result = sys_open(input_filename, O_READ);
-    movl    $SYS_OPEN, %eax
-    movl    %edi, %ebx
-    movl    $0, %ecx
-    int     $SYSCALL
+    ## input_fd = sys_open(input_filename, O_READ);
+    movl $SYS_OPEN, %eax
+    movl %edi, %ebx
+    movl $0, %ecx
+    int  $SYSCALL
+    movl %eax, %edi
 
-    ## if (result <= 0) goto _error_opening_files;
-    cmpl    $0, %eax
-    jle      _error_opening_files
+    ## if (input_fd <= 0) goto _error_opening_files;
+    cmpl $0, %edi
+    jle  _error_opening_files
 
-    ## input_fd = result;
-    movl    %eax, input_fd
 
-    ## result = sys_open(output_filename, O_WRITE | O_CREAT, 0744);
-    movl    $SYS_OPEN, %eax
-    movl    %esi, %ebx
-    movl    $65, %ecx
-    movl    $0744, %edx
-    int     $SYSCALL
+    ## output_fd = sys_open(output_filename, O_WRITE | O_CREAT, 0744);
+    movl $SYS_OPEN, %eax
+    movl %esi, %ebx
+    movl $65, %ecx
+    movl $0744, %edx
+    int  $SYSCALL
+    movl %eax, %esi
 
-    ## if (result <= 0) goto _error_opening_files
-    cmpl    $0, %eax
+    ## if (output_fd <= 0) goto _error_opening_files
+    cmpl    $0, %esi
     jl      _error_opening_files
-
-    ## output_fd = result;
-    movl    %eax, output_fd         
 
     ret
 

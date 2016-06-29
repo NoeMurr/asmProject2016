@@ -1,27 +1,20 @@
 # Funzione che scrive una riga alla volta nel file di output
-
-.code32								# per indicare all' assemblatore di assemblare
-									# a 32 bit
 .include "syscall.inc"
 
-.section .bss
-
+.bss
     .equ OUTPUT_BUFF_LEN, 8
     output_buff: .space OUTPUT_BUFF_LEN
 
-.section .text
-    .globl  _write_line
-    .type   _write_line, @function
+.text
     MOD_00: .ascii "00"             # motore spento 
     MOD_01: .ascii "01"             # motore sotto giri
     MOD_10: .ascii "10"             # motore in stato ottimale 
     MOD_11: .ascii "11"             # motore fuori giri
     .equ MOD_LEN, 2
 
-_write_line:
-
-    pushl   %ebp
-    movl    %esp, %ebp
+.globl  write_line
+.type   write_line, @function
+write_line:
 
     leal    output_buff, %edi       # spostiamo il puntatore del buffer di output in EDI 
 
@@ -87,10 +80,6 @@ _print_numb:
     leal    output_buff, %ecx
     movl    $OUTPUT_BUFF_LEN, %edx
     int     $SYSCALL
-
-
-    movl    %ebp, %esp
-    popl    %ebp
 
     ret
 

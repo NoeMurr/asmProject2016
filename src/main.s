@@ -57,34 +57,37 @@ _start:
     cmpl $3, (%ebp)
     jne  _show_usage
 
-    ## open_files(argv[1], argv[2]); 
+    ## (input_fd, output_fd) = open_files(argv[1], argv[2]); 
     movl 8(%ebp), %edi
     movl 12(%ebp), %esi
-    call _open_files
+    call open_files
+    movl %edi, input_fd
+    movl %esi, output_fd
 
 _main_loop:
 
     # Leggiamo la riga 
-    call    _read_line
+    call    read_line
 
     # Caso EOF
     cmpl $-1, %ebx
     je _end
 
     # Controllo delle variabili 
-    call    _check
+    call    check
 
     # Scrittura della riga di output su file 
-    call    _write_line
+    call    write_line
 
     # Leggi un altra riga fino che non trovi la fine del file
     jmp _main_loop
 
 _end:
     
-    call _close_files
+    ## close_files(input_fd, output_fd)
+    call close_files
 
-    # sys_exit(0);
+    ## sys_exit(0);
     movl $SYS_EXIT, %eax
     movl $0, %ebx
     int $SYSCALL
