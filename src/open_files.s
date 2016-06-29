@@ -7,8 +7,10 @@
 .include "syscall.inc"
 
 .section .text
+
 	error_opening_files: .asciz "errore nell' apertura dei file\n"
 	.equ 	ERROR_OPENING_LENGHT, .-error_opening_files
+
 	.globl 	_open_files 			# dichiaro la funzione globale
 	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
 
