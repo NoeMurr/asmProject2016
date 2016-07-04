@@ -37,8 +37,9 @@ _open_files:
 									# di output che avevo messo sullo stack
 
 	movl 	$SYS_OPEN, %eax 		# chiamata di sistema open
-	movl 	$2, %ecx 				# read and write, mode
-	int 	$SYSCALL 				# apro il file
+	movl 	$65, %ecx 					# apro il file
+    movl 	$01101, %edx				# read and write, mode
+	int 	$SYSCALL
 
 	cmpl 	$0, %eax
 	jl		_error_opening_files
