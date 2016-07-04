@@ -78,7 +78,7 @@
 
 \newcommand{\hmwkTitle}{Elaborato\ Assembly}
 \newcommand{\hmwkClass}{Architettura degli Elaboratori}
-\newcommand{\hmwkAuthorName}{Alessandro Righi,\ Mirko Morati,\ Noè Murr}
+\newcommand{\hmwkAuthorName}{Mirko Morati,\ Noè Murr}
 
 %------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -169,7 +169,7 @@
 		\item \texttt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
 		\item \texttt{USAGE\_LENGTH}: Costante necessaria per la stampa della stringa.
 	\end{itemize}
-		\subsubsection{Funzioni e Etichette}
+		\subsubsection{Funzioni ed Etichette}
 	\begin{itemize}
 		\item \texttt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
 		\item \texttt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
@@ -182,6 +182,46 @@
 	\subsubsection{Variabili Locali} 
 	\begin{itemize}
 		\item \texttt{error\_opening\_files}: Stringa di errore in caso di errata apertura dei file (file mancante, file corrotto \ldots).
-		\item \texttt{ERROR\_OPENING\_LENGTH}: Costante 
+		\item \texttt{ERROR\_OPENING\_LENGTH}: Costante che contiene la lunghezza della stringa di errore.
 	\end{itemize}
-\end{document}
+	
+	\subsubsection{Funzioni ed Etichette}
+	\begin{itemize}
+		\item \texttt{\_open\_files}: Si occupa di aprire i file e gestisce eventuali errori. In caso il file di output non esistesse, questo viene creato in automatico con permessi di lettura e scrittura. I descrittori ottenuti vengono salvati nelle corrispondenti variabili globali. 
+		\item \texttt{\_error\_opening\_files}: In caso di errore viene stampato su \texttt{STDERR} la stringa opportuna, dopodiché il programma viene terminato con codice di errore 2. 
+	\end{itemize}
+	
+	\subsection{read\_line.s}
+	Contiene la funzione che si occupa di leggere ed interpretare una riga per volta del file di input.
+	\subsubsection{Variabili Locali}
+	\begin{itemize}
+		\item \texttt{input\_buff}: Buffer di dimensione \texttt{INPUT\_BUFF\_LEN} che conterrà i caratteri della riga letta dal file di input.
+		\item \texttt{INPUT\_BUFF\_LEN}: Dimensione del buffer.
+	\end{itemize}
+	
+	\subsubsection{Funzioni ed Etichette}
+	\begin{itemize}
+		\item \texttt{\_read\_line}: Legge dal file una riga tramite la chiamata \texttt{read} e si occupa di tradurre i caratteri letti in interi mediante la funzione \texttt{\_atoi} salvandoli nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof} 
+		\item \texttt{\_eof}: In caso di end of file mette -1 in \texttt{\%ebx} e ritorna.
+	\end{itemize}
+	
+	\subsection{atoi.s}
+	Contiene la funzione che si occupa di convertire una serie di caratteri \texttt{ASCII} in un numero intero. 
+	\subsubsection{Funzioni ed Etichette}
+	\begin{itemize}
+		\item \texttt{\_atoi}: Vengono inizializzati i registri necessari alla conversione.
+		\item \texttt{\_atoi\_loop}: Loop principale, converte la stringa puntata da \texttt{\%edi} in un intero salvato in \texttt{\%eax}. 
+	\end{itemize}
+	
+	\subsection{check.s}
+	Contiene la funzione che si occupa di settare sulla base dei valori di input e dei valori del ciclo precedente i corretti parametri delle variabili \texttt{alm, mod, numb}. 
+	\subsubsection{Funzioni ed Etichette}
+	\begin{itemize}
+		\item \texttt{\_check}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
+		\item \texttt{\_fg; \_sg; \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
+		\item \texttt{\_reset\_numb}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
+		\item \texttt{\_set\_alm}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portano il valore di \texttt{alm} a 1.
+		\item \texttt{\_init\_0}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
+		\item \texttt{\_end\_check}: 
+	\end{itemize}
+	\end{document}
