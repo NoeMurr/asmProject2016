@@ -109,6 +109,14 @@
 
 \newcommand{\Assembly}{\texttt{Assembly} }
 
+\newcommand{\myparagraph}[2]{
+	\begin{table}[!ht]
+		\begin{tabular}{p{0.17\linewidth} | p{0.8\linewidth}}
+			\texttt{#1} & #2
+		\end{tabular}
+	\end{table}
+			}
+
 \lstdefinestyle{BashStyle}{
   language=bash,
   basicstyle=\ttfamily,
@@ -169,13 +177,23 @@
 		\item \texttt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
 		\item \texttt{USAGE\_LENGTH}: Costante necessaria per la stampa della stringa.
 	\end{itemize}
+	
 		\subsubsection{Funzioni ed Etichette}
-	\begin{itemize}
-		\item \texttt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
-		\item \texttt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
-		\item \texttt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
-		\item \texttt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
-	\end{itemize}  
+		
+		\myparagraph{\_start}{Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}.}
+		
+		\myparagraph{\_main\_loop}{Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.}
+		
+		\myparagraph{\_end}{Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.}
+		
+		\myparagraph{\_show\_usage}{Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.}
+		
+%	\begin{itemize}
+%		\item \texttt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
+%		\item \texttt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
+%		\item \texttt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
+%		\item \texttt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
+%	\end{itemize}  
 	
 	\subsection{open\_files.s}
 	Contiene la funzione che si occupa di aprire i file in modo corretto.
@@ -218,10 +236,39 @@
 	\subsubsection{Funzioni ed Etichette}
 	\begin{itemize}
 		\item \texttt{\_check}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
-		\item \texttt{\_fg; \_sg; \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
+		\item \texttt{\_fg - \_sg - \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
 		\item \texttt{\_reset\_numb}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
 		\item \texttt{\_set\_alm}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portano il valore di \texttt{alm} a 1.
 		\item \texttt{\_init\_0}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
-		\item \texttt{\_end\_check}: 
+		\item \texttt{\_end\_check}: Abbiamo ritenuto opportuno (per evitare di preoccupare troppo il conducente) considerare un numero di secondi di massimo due cifre. Prima di terminare la funzione si controlla che il valore di \texttt{numb} non sia superiore a 99, in caso si salta a \texttt{\_numb\_overflow} che azzera \texttt{numb}.
 	\end{itemize}
+	
+	\subsection{write\_line.s}
+	Contiene la funzione che si occupa di creare la stringa di output e scriverla sul corrispondente file. 
+	\subsubsection{Variabili Locali}
+	\myparagraph{output\_buff}{Buffer di dimensione \texttt{OUTPUT\_BUFF\_LEN} che conterrà i caratteri della stringa da scrivere sul file di output.}
+	\myparagraph{OUTPUT\_BUFF\_LEN}{Dimensione del buffer.}
+	\myparagraph{MOD\_XX}{Stringhe costanti che identificano la modalità di funzionamento corrispondente in binario.}
+	\myparagraph{MOD\_LEN}{Dimensione della stringa di modalità.}
+	
+	\subsubsection{Funzioni ed Etichette}
+	\myparagraph{\_write\_line}{Inizializza i registri necessari alla scrittura sulla variabile di buffer.}
+	\myparagraph{\_alm\_X}{Aggiunge al buffer il corretto valore di \texttt{alm}.}
+	\myparagraph{\_print\_mod}{Aggiunge al buffer una virgola come separatore e in base al valore di \texttt{mod} salta alla corrispondente etichetta.}
+	\myparagraph{\_mod\_X}{La stringa corrispondente alla modalità X codificata in binario viene messa in \texttt{\%eax}, in seguito viene aggiunta al buffer nell'etichetta \texttt{\_end\_print\_mod}.}
+	\myparagraph{\_print\_numb}{Si occupa di aggiungere al buffer il valore di \texttt{numb} opportunamente convertito in \texttt{ASCII} e di terminare la stringa con il carattere \texttt{\textbackslash n}.}
+	\myparagraph{\_numb\_one\_digit}{Se il valore di \texttt{numb} è minore di 10 si occupa di aggiungere uno 0 prima della cifra.}
+	
+	\subsection{itoa.s}
+	Contiene la funzione per convertire un valore da intero a una corrispondente stringa \texttt{ASCII}.
+	\subsubsection{Funzioni ed Etichette} 
+	\myparagraph{\_itoa}{Inizializza i registri necessari alla conversione.}
+	\myparagraph{\_itoa\_dividi}{Si occupa di contare i caratteri necessari per la stringa e di posizionare il carattere \texttt{\textbackslash 0} alla fine della stringa.}
+	\myparagraph{\_itoa\_converti}{Scrive ogni cifra nella posizione corretta della stringa.}
+	
+	\subsection{close\_files.s}
+	Contiene la funzione per chiudere correttamente un file. 
+	
+
+	
 	\end{document}
