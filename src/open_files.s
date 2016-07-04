@@ -41,7 +41,7 @@ _open_files:
 	movl 	$SYS_OPEN, %eax 		# chiamata di sistema open
 <<<<<<< HEAD
 	movl 	$01101, %ecx 				# read and write, mode
-    movl    $0744, %edx            # flags
+    movl    $0644, %edx            # flags
 	int 	$SYSCALL 				# apro il file
 =======
 	movl 	$65, %ecx 					# apro il file
