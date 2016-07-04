@@ -9,7 +9,7 @@
 .section .text
 
 	error_opening_files: .asciz "errore nell' apertura dei file\n"
-	.equ 	ERROR_OPENING_LENGHT, .-error_opening_files
+	.equ 	ERROR_OPENING_LENGTH, .-error_opening_files
 
 	.globl 	_open_files 			# dichiaro la funzione globale
 	.type 	_open_files, @function 	# dichiaro l' etichetta come una funzione
@@ -54,11 +54,11 @@ _open_files:
 	ret 							# ritorna al chiamante
 
 _error_opening_files:
-	# sys_write(stdout, usage, USAGE_LENGHT);
+	# sys_write(stdout, usage, USAGE_LENGTH);
 	movl $SYS_WRITE, %eax
 	movl $STDOUT, %ebx
 	movl $error_opening_files, %ecx
-	movl $ERROR_OPENING_LENGHT, %edx
+	movl $ERROR_OPENING_LENGTH, %edx
 	int $SYSCALL
 
 	# sys_exit(1);
