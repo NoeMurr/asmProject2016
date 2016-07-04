@@ -136,9 +136,21 @@
 	
 	\subsection{syscall.inc}
 	Header file contenente la definizione di alcune costanti, tramite la pseudo-operazione \texttt{.equ}, relative alle chiamate di sistema e ad alcuni standard utilizzati in tutti i file e riportati di seguito:
-	\begin{itemize}
-		\item 
-	\end{itemize}
+	\begin{table}[h]
+		\begin{tabular}{| l | c |}
+			\hline
+			SYS\_EXIT & 1 \\ \hline
+			SYS\_READ & 3 \\ \hline
+			SYS\_WRITE & 4 \\ \hline
+			SYS\_OPEN & 5 \\ \hline
+			SYS\_CLOSE & 6 \\ \hline
+			STDIN & 0 \\ \hline
+			STDOUT & 1 \\ \hline
+			STDERR & 2			 \\ \hline
+			SYSCALL & 0x80 \\ \hline
+		\end{tabular}
+	\end{table}
+	
 	\subsection{main.s}
 	File principale del programma. 
 		\subsubsection{Variabili Globali}
@@ -164,4 +176,12 @@
 		\item \texttt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
 		\item \texttt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
 	\end{itemize}  
+	
+	\subsection{open\_files.s}
+	Contiene la funzione che si occupa di aprire i file in modo corretto.
+	\subsubsection{Variabili Locali} 
+	\begin{itemize}
+		\item \texttt{error\_opening\_files}: Stringa di errore in caso di errata apertura dei file (file mancante, file corrotto \ldots).
+		\item \texttt{ERROR\_OPENING\_LENGTH}: Costante 
+	\end{itemize}
 \end{document}
