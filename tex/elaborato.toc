@@ -1,0 +1,9 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}Descrizione del progetto}{3}
+\contentsline {section}{\numberline {2}File}{3}
+\contentsline {subsection}{\numberline {2.1}syscall.inc}{3}
+\contentsline {subsection}{\numberline {2.2}main.s}{3}
+\contentsline {subsubsection}{\numberline {2.2.1}Variabili Globali}{3}
+\contentsline {subsubsection}{\numberline {2.2.2}Variabili Locali}{3}
+\contentsline {subsubsection}{\numberline {2.2.3}Funzioni e Etichette}{4}
