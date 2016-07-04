@@ -40,7 +40,7 @@ _open_files:
 
 	movl 	$SYS_OPEN, %eax 		# chiamata di sistema open
 	movl 	$01101, %ecx 				# read and write, mode
-    movl    $0644, %edx            # flags
+    movl    $0666, %edx            # flags
 	int 	$SYSCALL 				# apro il file
 
 	cmpl 	$0, %eax
