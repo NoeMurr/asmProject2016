@@ -61,7 +61,7 @@ _error_opening_files:
 	movl $ERROR_OPENING_LENGTH, %edx
 	int $SYSCALL
 
-	# sys_exit(1);
+	# sys_exit(2);
     movl $SYS_EXIT, %eax
     movl $2, %ebx
     int $SYSCALL
