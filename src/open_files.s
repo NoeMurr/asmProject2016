@@ -56,7 +56,7 @@ _open_files:
 _error_opening_files:
 	# sys_write(stdout, usage, USAGE_LENGTH);
 	movl $SYS_WRITE, %eax
-	movl $STDOUT, %ebx
+	movl $STDERR, %ebx
 	movl $error_opening_files, %ecx
 	movl $ERROR_OPENING_LENGTH, %edx
 	int $SYSCALL
