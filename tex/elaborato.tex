@@ -31,7 +31,7 @@
 %\newcommand\ceil[1]{\lceil#1\rceil}
 \usepackage{zi4}
 \usepackage{tikz}
-\usetikzlibrary{automata, arrows, positioning, calc, matrix, shapes.geometric}
+\usetikzlibrary{automata, arrows, positioning, calc, matrix, shapes.geometric, chains}
 \usepackage{verbatim}
 
 
@@ -106,16 +106,38 @@
 %\newcommand{\inctxt}[1]{\textit{\fontfamily{zi4}\selectfont #1}}
 %------------------------------------------------------------------------------------
 
+\renewcommand{\labelitemi}{$\cdot$}
 
 \newcommand{\Assembly}{\texttt{Assembly} }
 
+\newcommand{\itemtt}[1]{\item \texttt{#1}}
+
 \newcommand{\myparagraph}[2]{
 	\begin{table}[!ht]
-		\begin{tabular}{p{0.17\linewidth} | p{0.8\linewidth}}
+		\begin{tabular}{p{0.175\linewidth} | p{0.8\linewidth}}
 			\texttt{#1} & #2
 		\end{tabular}
 	\end{table}
 			}
+			
+
+%------------------------------------------------------------------------------------
+%	TIKZ DEFINIZIONI
+%------------------------------------------------------------------------------------
+\tikzstyle{base} = [text width = 10em]
+\tikzstyle{startstop} = [rectangle, rounded corners, base, text centered, draw=black]
+\tikzstyle{process} = [rectangle, base, text centered, draw=black]
+\tikzstyle{decision} = [
+diamond,
+aspect = 2,
+draw,
+text width=8em,
+text badly centered,
+inner sep=0pt]
+\tikzstyle{io} = [trapezium, base, trapezium left angle=70, trapezium right angle=110, text centered, draw=black]
+
+\tikzstyle{arrow} = [draw, thick,->,>=stealth]
+			
 
 \lstdefinestyle{BashStyle}{
   language=bash,
@@ -138,13 +160,12 @@
 	\section{Descrizione del progetto}
 	Si vuole realizzare un programma \Assembly per il monitoraggio di un motore a combustione interna il quale, ricevuto come ingresso il numero di giri/minuto del motore, fornisca in uscita la modalità di funzionamento corrente del motore: \textit{Sotto Giri, Ottimale, Fuori Giri}. Il programma deve contare e visualizzare in uscita il numero dei secondi trascorsi nella modalità di funzionamento attuale ed inoltre attivare il segnale di allarme nel caso in cui il motore si trovi in modalità \textit{Fuori Giri} da più di 15 secondi.
 	
-	
-	\section{File}
+	\vspace {5mm}
 	Di seguito verranno descritte le funzioni presenti in ogni file del programma, etichette, eventuali variabili e loro scopo. 
 	
-	\subsection{syscall.inc}
+	\section{syscall.inc}
 	Header file contenente la definizione di alcune costanti, tramite la pseudo-operazione \texttt{.equ}, relative alle chiamate di sistema e ad alcuni standard utilizzati in tutti i file e riportati di seguito:
-	\begin{table}[h]
+	\begin{table}[!h]
 		\begin{tabular}{| l | c |}
 			\hline
 			SYS\_EXIT & 1 \\ \hline
@@ -159,114 +180,163 @@
 		\end{tabular}
 	\end{table}
 	
-	\subsection{main.s}
+	\section{main.s}
 	File principale del programma. 
-		\subsubsection{Variabili Globali}
+	
+	\subsection{Flowchart}
+	\begin{center}
+		
+		\begin{tikzpicture}[node distance = 2cm, auto]
+		
+		
+		\node	(start)	   [startstop] 					{Inizio};
+		\node	(i1) 		[io, below of = start] 				 {eax $\leftarrow$ \#argomenti};
+		\node	(d1) 	  [decision, below of = i1] 	  {eax == 3 ?};
+		\node	(e1)    [startstop, right of = d1, node distance = 6cm] 	 {Stampa messaggio ed esci con errore 1};
+		\node	(i2)	[io, below of = d1, node distance = 2.5cm]		{input\_file\_name output\_file\_name};
+		\node	(p1)  [process, below of = i2] 	  {call \_open\_files};
+		\node	(p2)	[process, below of = p1]	{call \_read\_line};
+		\node	(d2)   [decision, below of = p2]	  {ebx == -1 ?};
+		\node   (p3)	[process, right of = d2, node distance = 7cm]		{call \_close\_files};
+		\node	(e0)   [startstop, below of = p3]		{Esci con codice 0};
+		\node	(p4)	[process, below of = d2, node distance = 2.5cm]		{call \_check};
+		\node 	(p5)	[process, below of = p4]		{call \_write\_line};
+		
+		\path	[arrow]		(start)	--	(i1);
+		\path	[arrow]		(i1)	--	(d1);
+		\path	[arrow]		(d1)	--	node {Si} (i2);
+		\path	[arrow]		(d1)	--	node {No} (e1);
+		\path	[arrow]		(i2)	--	(p1);
+		\path	[arrow]		(p1)	--	(p2);
+		\path	[arrow]		(p2)	--	(d2);
+		\path	[arrow]		(d2)	--	node {Si} (p4);
+		\path	[arrow]		(d2)	--	node {No} (p3);
+		\path	[arrow]		(p3)	--	(e0);
+		\path	[arrow]		(p4)	--	(p5);
+		\path	[arrow]		(p5.west) node [anchor =south west] {} --+(-1cm,0)  |-(p2);
+		
+		\end{tikzpicture}
+		
+	\end{center}
+		
+		\subsection{Variabili Globali}
 		\begin{itemize}
-			\item \texttt{input\_fd}: Contiene il descrittore del file di input;
-			\item \texttt{output\_fd}: Contiene il descrittore del file di output;
-			\item \texttt{init}: Contiene il valore del segnale INIT corrente;
-			\item \texttt{reset}: Contiene il valore del segnale RESET corrente;
-			\item \texttt{rpm}: Contiene il valore del segnale RPM corrente;
-			\item \texttt{alm}: Contiene il valore del segnale ALM corrente;
-			\item \texttt{mod}: Contiene il valore del segnale MOD corrente;
-			\item \texttt{numb}: Contiene il valore del segnale NUMB corrente.
+			\itemtt{input\_fd}: Contiene il descrittore del file di input;
+			\itemtt{output\_fd}: Contiene il descrittore del file di output;
+			\itemtt{init}: Contiene il valore del segnale INIT corrente;
+			\itemtt{reset}: Contiene il valore del segnale RESET corrente;
+			\itemtt{rpm}: Contiene il valore del segnale RPM corrente;
+			\itemtt{alm}: Contiene il valore del segnale ALM corrente;
+			\itemtt{mod}: Contiene il valore del segnale MOD corrente;
+			\itemtt{numb}: Contiene il valore del segnale NUMB corrente.
 		\end{itemize}
-		\subsubsection{Variabili Locali}
+		\subsection{Variabili Locali}
 	\begin{itemize}
-		\item \texttt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
-		\item \texttt{USAGE\_LENGTH}: Costante necessaria per la stampa della stringa.
+		\itemtt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
+		\itemtt{USAGE\_LENGTH}: Costante necessaria per la stampa della stringa.
 	\end{itemize}
 	
-		\subsubsection{Funzioni ed Etichette}
+		\subsection{Funzioni ed Etichette}
 		
-		\myparagraph{\_start}{Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}.}
-		
-		\myparagraph{\_main\_loop}{Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.}
-		
-		\myparagraph{\_end}{Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.}
-		
-		\myparagraph{\_show\_usage}{Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.}
-		
-%	\begin{itemize}
-%		\item \texttt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
-%		\item \texttt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
-%		\item \texttt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
-%		\item \texttt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
-%	\end{itemize}  
+%		\myparagraph{\_start}{Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}.}
+%		
+%		\myparagraph{\_main\_loop}{Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.}
+%		
+%		\myparagraph{\_end}{Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.}
+%		
+%		\myparagraph{\_show\_usage}{Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.}
+%		
+\begin{itemize}
+		\itemtt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
+    	\itemtt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
+		\itemtt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.
+		\itemtt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
+	\end{itemize}  
 	
-	\subsection{open\_files.s}
+	\section{open\_files.s}
 	Contiene la funzione che si occupa di aprire i file in modo corretto.
-	\subsubsection{Variabili Locali} 
+	
+	\subsection{Flowchart}
+	\begin{center}
+		\begin{tikzpicture}[node distance = 2cm, auto]
+		\end{tikzpicture}
+	\end{center}
+	\subsection{Variabili Locali} 
 	\begin{itemize}
-		\item \texttt{error\_opening\_files}: Stringa di errore in caso di errata apertura dei file (file mancante, file corrotto \ldots).
-		\item \texttt{ERROR\_OPENING\_LENGTH}: Costante che contiene la lunghezza della stringa di errore.
+		\itemtt{error\_opening\_files}: Stringa di errore in caso di errata apertura dei file (file mancante, file corrotto \ldots).
+		\itemtt{ERROR\_OPENING\_LENGTH}: Costante che contiene la lunghezza della stringa di errore.
 	\end{itemize}
 	
-	\subsubsection{Funzioni ed Etichette}
+	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\item \texttt{\_open\_files}: Si occupa di aprire i file e gestisce eventuali errori. In caso il file di output non esistesse, questo viene creato in automatico con permessi di lettura e scrittura. I descrittori ottenuti vengono salvati nelle corrispondenti variabili globali. 
-		\item \texttt{\_error\_opening\_files}: In caso di errore viene stampato su \texttt{STDERR} la stringa opportuna, dopodiché il programma viene terminato con codice di errore 2. 
+		\itemtt{\_open\_files}: Si occupa di aprire i file e gestisce eventuali errori. In caso il file di output non esistesse, questo viene creato in automatico con permessi di lettura e scrittura. I descrittori ottenuti vengono salvati nelle corrispondenti variabili globali. 
+		\itemtt{\_error\_opening\_files}: In caso di errore viene stampato su \texttt{STDERR} la stringa opportuna, dopodiché il programma viene terminato con codice di errore 2. 
 	\end{itemize}
 	
-	\subsection{read\_line.s}
+	\section{read\_line.s}
 	Contiene la funzione che si occupa di leggere ed interpretare una riga per volta del file di input.
-	\subsubsection{Variabili Locali}
+	\subsection{Variabili Locali}
 	\begin{itemize}
-		\item \texttt{input\_buff}: Buffer di dimensione \texttt{INPUT\_BUFF\_LEN} che conterrà i caratteri della riga letta dal file di input.
-		\item \texttt{INPUT\_BUFF\_LEN}: Dimensione del buffer.
+		\itemtt{input\_buff}: Buffer di dimensione \texttt{INPUT\_BUFF\_LEN} che conterrà i caratteri della riga letta dal file di input.
+		\itemtt{INPUT\_BUFF\_LEN}: Dimensione del buffer.
 	\end{itemize}
 	
-	\subsubsection{Funzioni ed Etichette}
+	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\item \texttt{\_read\_line}: Legge dal file una riga tramite la chiamata \texttt{read} e si occupa di tradurre i caratteri letti in interi mediante la funzione \texttt{\_atoi} salvandoli nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof} 
-		\item \texttt{\_eof}: In caso di end of file mette -1 in \texttt{\%ebx} e ritorna.
+		\itemtt{\_read\_line}: Legge dal file una riga tramite la chiamata \texttt{read} e si occupa di tradurre i caratteri letti in interi mediante la funzione \texttt{\_atoi} salvandoli nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof} 
+		\itemtt{\_eof}: In caso di end of file mette -1 in \texttt{\%ebx} e ritorna.
 	\end{itemize}
 	
-	\subsection{atoi.s}
+	\section{atoi.s}
 	Contiene la funzione che si occupa di convertire una serie di caratteri \texttt{ASCII} in un numero intero. 
-	\subsubsection{Funzioni ed Etichette}
+	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\item \texttt{\_atoi}: Vengono inizializzati i registri necessari alla conversione.
-		\item \texttt{\_atoi\_loop}: Loop principale, converte la stringa puntata da \texttt{\%edi} in un intero salvato in \texttt{\%eax}. 
+		\itemtt{\_atoi}: Vengono inizializzati i registri necessari alla conversione.
+		\itemtt{\_atoi\_loop}: Loop principale, converte la stringa puntata da \texttt{\%edi} in un intero salvato in \texttt{\%eax}. 
 	\end{itemize}
 	
-	\subsection{check.s}
+	\section{check.s}
 	Contiene la funzione che si occupa di settare sulla base dei valori di input e dei valori del ciclo precedente i corretti parametri delle variabili \texttt{alm, mod, numb}. 
-	\subsubsection{Funzioni ed Etichette}
+	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\item \texttt{\_check}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
-		\item \texttt{\_fg - \_sg - \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
-		\item \texttt{\_reset\_numb}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
-		\item \texttt{\_set\_alm}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portano il valore di \texttt{alm} a 1.
-		\item \texttt{\_init\_0}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
-		\item \texttt{\_end\_check}: Abbiamo ritenuto opportuno (per evitare di preoccupare troppo il conducente) considerare un numero di secondi di massimo due cifre. Prima di terminare la funzione si controlla che il valore di \texttt{numb} non sia superiore a 99, in caso si salta a \texttt{\_numb\_overflow} che azzera \texttt{numb}.
+		\itemtt{\_check}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
+		\itemtt{\_fg - \_sg - \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
+		\itemtt{\_reset\_numb}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
+		\itemtt{\_set\_alm}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portano il valore di \texttt{alm} a 1.
+		\itemtt{\_init\_0}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
+		\itemtt{\_end\_check}: Abbiamo ritenuto opportuno (per evitare di preoccupare troppo il conducente) considerare un numero di secondi di massimo due cifre. Prima di terminare la funzione si controlla che il valore di \texttt{numb} non sia superiore a 99, in caso si salta a \texttt{\_numb\_overflow} che azzera \texttt{numb}.
 	\end{itemize}
 	
-	\subsection{write\_line.s}
+	\section{write\_line.s}
 	Contiene la funzione che si occupa di creare la stringa di output e scriverla sul corrispondente file. 
-	\subsubsection{Variabili Locali}
-	\myparagraph{output\_buff}{Buffer di dimensione \texttt{OUTPUT\_BUFF\_LEN} che conterrà i caratteri della stringa da scrivere sul file di output.}
-	\myparagraph{OUTPUT\_BUFF\_LEN}{Dimensione del buffer.}
-	\myparagraph{MOD\_XX}{Stringhe costanti che identificano la modalità di funzionamento corrispondente in binario.}
-	\myparagraph{MOD\_LEN}{Dimensione della stringa di modalità.}
+	\subsection{Variabili Locali}
+		\begin{itemize}
+			\itemtt{output\_buff}: Buffer di dimensione \texttt{OUTPUT\_BUFF\_LEN} che conterrà i caratteri della stringa da scrivere sul file di output.
+			\itemtt{OUTPUT\_BUFF\_LEN}: Dimensione del buffer.
+			\itemtt{MOD\_XX}: Stringhe costanti che identificano la modalità di funzionamento corrispondente in binario.
+			\itemtt{MOD\_LEN}: Dimensione della stringa di modalità.
+		\end{itemize}
 	
-	\subsubsection{Funzioni ed Etichette}
-	\myparagraph{\_write\_line}{Inizializza i registri necessari alla scrittura sulla variabile di buffer.}
-	\myparagraph{\_alm\_X}{Aggiunge al buffer il corretto valore di \texttt{alm}.}
-	\myparagraph{\_print\_mod}{Aggiunge al buffer una virgola come separatore e in base al valore di \texttt{mod} salta alla corrispondente etichetta.}
-	\myparagraph{\_mod\_X}{La stringa corrispondente alla modalità X codificata in binario viene messa in \texttt{\%eax}, in seguito viene aggiunta al buffer nell'etichetta \texttt{\_end\_print\_mod}.}
-	\myparagraph{\_print\_numb}{Si occupa di aggiungere al buffer il valore di \texttt{numb} opportunamente convertito in \texttt{ASCII} e di terminare la stringa con il carattere \texttt{\textbackslash n}.}
-	\myparagraph{\_numb\_one\_digit}{Se il valore di \texttt{numb} è minore di 10 si occupa di aggiungere uno 0 prima della cifra.}
+	\subsection{Funzioni ed Etichette}
+		\begin{itemize}
+			\itemtt{\_write\_line}: Inizializza i registri necessari alla scrittura sulla variabile di buffer.
+			\itemtt{\_alm\_X}: Aggiunge al buffer il corretto valore di \texttt{alm}.
+			\itemtt{\_print\_mod}: Aggiunge al buffer una virgola come separatore e in base al valore di \texttt{mod} salta alla corrispondente etichetta.
+			\itemtt{\_mod\_X}: La stringa corrispondente alla modalità X codificata in binario viene messa in \texttt{\%eax}, in seguito viene aggiunta al buffer nell'etichetta \texttt{\_end\_print\_mod}.
+			\itemtt{\_print\_numb}: Si occupa di aggiungere al buffer il valore di \texttt{numb} opportunamente convertito in \texttt{ASCII} e di terminare la stringa con il carattere \texttt{\textbackslash n}.
+			\itemtt{\_numb\_one\_digit}: Se il valore di \texttt{numb} è minore di 10 si occupa di aggiungere uno 0 prima della cifra.
+		\end{itemize}
 	
-	\subsection{itoa.s}
+	\section{itoa.s}
 	Contiene la funzione per convertire un valore da intero a una corrispondente stringa \texttt{ASCII}.
-	\subsubsection{Funzioni ed Etichette} 
-	\myparagraph{\_itoa}{Inizializza i registri necessari alla conversione.}
-	\myparagraph{\_itoa\_dividi}{Si occupa di contare i caratteri necessari per la stringa e di posizionare il carattere \texttt{\textbackslash 0} alla fine della stringa.}
-	\myparagraph{\_itoa\_converti}{Scrive ogni cifra nella posizione corretta della stringa.}
+	\subsection{Funzioni ed Etichette} 
+		\begin{itemize}
+			\itemtt{\_itoa}: Inizializza i registri necessari alla conversione.
+			\itemtt{\_itoa\_dividi}: Si occupa di contare i caratteri necessari per la stringa e di posizionare il carattere \texttt{\textbackslash 0} alla fine della stringa.
+			\itemtt{\_itoa\_converti}: Scrive ogni cifra nella posizione corretta della stringa.
+		\end{itemize}
 	
-	\subsection{close\_files.s}
+	\section{close\_files.s}
 	Contiene la funzione per chiudere correttamente un file. 
 	
 
