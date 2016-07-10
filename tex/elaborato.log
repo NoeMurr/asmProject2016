@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  10 JUL 2016 22:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  10 JUL 2016 22:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -596,12 +596,6 @@ Package zref Info: New property: urluse on input line 56.
 Package zref Info: New property: externaldocument on input line 57.
 \ZREF@xr@URL=\count159
 )
-Package zref Info: New property: anchor on input line 31.
-Package zref Info: New property: title on input line 31.
-Package zref-xr Info: Label (zref) import from `codice.aux' on input line 31.
-Package zref-xr Info: Statistics for `codice.aux':
-(zref-xr)             0 zref label(s) found.
-
 (/usr/local/texlive/2015/texmf-dist/tex/latex/inconsolata/zi4.sty
 Package: zi4 2014/06/22 v1.05
 
@@ -1129,37 +1123,37 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip134
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 48.
+Package hyperref Info: Option `colorlinks' set `true' on input line 46.
 
 (./elaborato.aux)
 \openout1 = `elaborato.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 221.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 221.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 200.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 200.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 221.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 221.
-LaTeX Font Info:    ... okay on input line 221.
+LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 200.
+LaTeX Font Info:    ... okay on input line 200.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-LaTeX Info: Redefining \it@ocap on input line 221.
-LaTeX Info: Redefining \it@ccap on input line 221.
+LaTeX Info: Redefining \it@ocap on input line 200.
+LaTeX Info: Redefining \it@ccap on input line 200.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1211,7 +1205,7 @@ LaTeX Info: Redefining \it@ccap on input line 221.
 )
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 221.
+(lastpage)             ! on input line 200.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -1235,7 +1229,7 @@ Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
 ABD: EveryShipout initializing macros
-Package hyperref Info: Link coloring ON on input line 221.
+Package hyperref Info: Link coloring ON on input line 200.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1245,9 +1239,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count198
 )
-LaTeX Info: Redefining \ref on input line 221.
-LaTeX Info: Redefining \pageref on input line 221.
-LaTeX Info: Redefining \nameref on input line 221.
+LaTeX Info: Redefining \ref on input line 200.
+LaTeX Info: Redefining \pageref on input line 200.
+LaTeX Info: Redefining \nameref on input line 200.
 
 (./elaborato.out) (./elaborato.out)
 \@outlinefile=\write4
@@ -1276,7 +1270,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [2]
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 233.
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 212.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
@@ -1295,10 +1289,10 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4]
 
-LaTeX Warning: Hyper reference `v:1:9' on page 5 undefined on input line 319.
+LaTeX Warning: Hyper reference `v:1:9' on page 5 undefined on input line 298.
 
 
-LaTeX Warning: Hyper reference `v:1:10' on page 5 undefined on input line 320.
+LaTeX Warning: Hyper reference `v:1:10' on page 5 undefined on input line 299.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1321,7 +1315,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [7]
-Package mdframed Info: Not enough space on this page on input line 396.
+Package mdframed Info: Not enough space on this page on input line 366.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1340,7 +1334,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.455 ...sting}[language=MyAssembler, style=MyAsm]
+l.425 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1348,7 +1342,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.455 ...sting}[language=MyAssembler, style=MyAsm]
+l.425 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1356,21 +1350,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.455 ...sting}[language=MyAssembler, style=MyAsm]
+l.425 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.455 ...sting}[language=MyAssembler, style=MyAsm]
+l.425 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1378,7 +1372,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1386,21 +1380,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1408,14 +1402,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.472 ...sting}[language=MyAssembler, style=MyAsm]
+l.442 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1436,7 +1430,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1444,7 +1438,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1452,21 +1446,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1474,14 +1468,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.572 ...sting}[language=MyAssembler, style=MyAsm]
+l.542 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1495,7 +1489,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1503,7 +1497,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1511,21 +1505,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1533,14 +1527,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.647 ...sting}[language=MyAssembler, style=MyAsm]
+l.617 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1561,7 +1555,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1569,7 +1563,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1577,21 +1571,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1599,14 +1593,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.711 ...sting}[language=MyAssembler, style=MyAsm]
+l.681 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1620,7 +1614,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1628,7 +1622,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1636,21 +1630,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1658,14 +1652,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.759 ...sting}[language=MyAssembler, style=MyAsm]
+l.729 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1686,7 +1680,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1694,7 +1688,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1702,21 +1696,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1724,14 +1718,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.869 ...sting}[language=MyAssembler, style=MyAsm]
+l.839 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1752,7 +1746,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1760,7 +1754,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1768,21 +1762,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1790,14 +1784,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.981 ...sting}[language=MyAssembler, style=MyAsm]
+l.951 ...sting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1811,7 +1805,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1819,7 +1813,7 @@ not appear between \csname and \endcsname.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1827,21 +1821,21 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@keywords6@list ...g\color {Violet}\endcsname 
                                                   
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \protect 
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
@@ -1849,14 +1843,14 @@ not appear between \csname and \endcsname.
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
 ! Extra \endcsname.
 \lst@gkeywords6@list ...\color {Violet}\endcsname 
                                                   
-l.1037 ...ting}[language=MyAssembler, style=MyAsm]
+l.1007 ...ting}[language=MyAssembler, style=MyAsm]
                                                   
 I'm ignoring this, since I wasn't doing a \csname.
 
@@ -1869,11 +1863,11 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1072.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1072.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1042.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1042.
  (./elaborato.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1072.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1072.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1042.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1042.
 
 Package rerunfilecheck Info: File `elaborato.out' has not changed.
 (rerunfilecheck)             Checksum: 316769C6DFA0F44BF8BA37A20D6DAC98;2013.
@@ -1881,15 +1875,12 @@ Package rerunfilecheck Info: File `elaborato.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 30658 strings out of 493089
- 578932 string characters out of 6134843
- 994041 words of memory out of 5000000
- 33008 multiletter control sequences out of 15000+600000
+ 30647 strings out of 493089
+ 578815 string characters out of 6134843
+ 994014 words of memory out of 5000000
+ 32998 multiletter control sequences out of 15000+600000
  18698 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,12n,66p,10419b,2004s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1907,7 +1898,7 @@ ocal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/loc
 al/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local
 /texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on elaborato.pdf (21 pages, 313270 bytes).
+Output written on elaborato.pdf (21 pages, 313288 bytes).
 PDF statistics:
  1105 PDF objects out of 1200 (max. 8388607)
  1059 compressed objects within 11 object streams
