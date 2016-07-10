@@ -164,6 +164,60 @@ inner sep=0pt]
   emph={souce, ps, map, -s, rl, rlib},emphstyle={\bfseries}
 }
 
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\lstdefinelanguage{MyAssembler}{
+	morecomment=[l][\color{mygray}]{\#},
+	morekeywords=[2]{eax, ebx, ecx, edx, edi, esp, ebp, al, bl, cl, dl, ah, bh, ch, dh},
+	%	morekeywords=[3]{\$, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+	morekeywords=[4]{popl,popb,pushl,pushb,jne,jn,call,int,movl,movb,xorl,xorb,subl,subb,addl,addb,mull,mulb,incl,cmpb,cmpl,jl,jg,jge,jle,je,jmp,ret},
+	morekeywords=[5]{section,data,type,long,bss,text,globl,equ,ascii,asciz,include},
+	morestring=[b][\color{mymauve}]{"},
+	morekeywords=[6][\color{Violet}]{},
+	morekeywords=[7]{input\_fd,output\_fd,init,reset,rpm,alm,numb,mod}
+}
+
+\lstdefinestyle{MyAsm}{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygray},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	literate={è}{{\'e}}1 {ì}{{\'i}}1 {é}{{\'e}}1  {ò}{{\'o}}1 {à}{{\'a}}1,
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	keywordstyle=[2]\color{BrickRed},
+	%	keywordstyle=[3]\color{green},
+	keywordstyle=[4]\color{blue},	
+	keywordstyle=[5]\color{Green},
+	keywordstyle=[7]\color{Orange},
+	%language={[x86masm]Assembler},                 % the language of the code
+	otherkeywords={...},           % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=4,	                   % sets default tabsize to 2 spaces
+	escapeinside={(*@}{@*)},
+	%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
 \begin{document}
 	\clearpage
 	\maketitle
@@ -186,7 +240,7 @@ inner sep=0pt]
 	\begin{table}[!h]
 		\begin{tabular}{| >{\ttfamily}l | c |}
 			\hline
-			SYS\_EXIT & 1 \\ \hline
+			\hyperref[s:1]{SYS\_EXIT} & 1 \\ \hline
 			SYS\_READ & 3 \\ \hline
 			SYS\_WRITE & 4 \\ \hline
 			SYS\_OPEN & 5 \\ \hline
@@ -244,43 +298,43 @@ inner sep=0pt]
 	\end{center}
 	
 	\newpage
-		
-		\subsection{Variabili Globali}
-		\begin{itemize}
-			\itemtt{input\_fd}: Contiene il descrittore del file di input;
-			\itemtt{output\_fd}: Contiene il descrittore del file di output;
-			\itemtt{init}: Contiene il valore del segnale INIT corrente;
-			\itemtt{reset}: Contiene il valore del segnale RESET corrente;
-			\itemtt{rpm}: Contiene il valore del segnale RPM corrente;
-			\itemtt{alm}: Contiene il valore del segnale ALM corrente;
-			\itemtt{mod}: Contiene il valore del segnale MOD corrente;
-			\itemtt{numb}: Contiene il valore del segnale NUMB corrente.
-		\end{itemize}
-		
-		\begin{framescelte}{Scelte Progettuali}
-			Si è scelto di utilizzare in modo estensivo le variabili globali in quanto in un progetto di così ridotte dimensioni si aumenta notevolmente la leggibilità del codice e nel contempo se ne riduce la complessità di scrittura. Se il progetto avesse richiesto computazioni più complesse questo approccio non sarebbe stato l'ideale, poiché sarebbero state compromesse le prestazioni totali dell'applicazione.
-		\end{framescelte}
-		\subsection{Variabili Locali}
+	
+	\subsection{Variabili Globali}
 	\begin{itemize}
-		\itemtt{usage}: Stringa per la descrizione del corretto utilizzo del programma;
-		\itemtt{USAGE\_LENGTH}: Contiene la lunghezza della stringa, necessaria per la stampa.
+		\itemtt{\hyperref[v:1:1]{input\_fd}}: Contiene il descrittore del file di input;
+		\itemtt{\hyperref[v:1:2]{output\_fd}}: Contiene il descrittore del file di output;
+		\itemtt{\hyperref[v:1:3]{init}}: Contiene il valore del segnale INIT corrente;
+		\itemtt{\hyperref[v:1:4]{reset}}: Contiene il valore del segnale RESET corrente;
+		\itemtt{\hyperref[v:1:5]{rpm}}: Contiene il valore del segnale RPM corrente;
+		\itemtt{\hyperref[v:1:6]{alm}}: Contiene il valore del segnale ALM corrente;
+		\itemtt{\hyperref[v:1:7]{mod}}: Contiene il valore del segnale MOD corrente;
+		\itemtt{\hyperref[v:1:8]{numb}}: Contiene il valore del segnale NUMB corrente.
 	\end{itemize}
 	
-		\subsection{Funzioni ed Etichette}
-		
-%		\myparagraph{\_start}{Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}.}
-%		
-%		\myparagraph{\_main\_loop}{Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.}
-%		
-%		\myparagraph{\_end}{Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.}
-%		
-%		\myparagraph{\_show\_usage}{Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.}
-%		
-\begin{itemize}
-		\itemtt{\_start}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
-    	\itemtt{\_main\_loop}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{ebx} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF} $\rightarrow$ End Of File) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
-		\itemtt{\_end}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{exit}.
-		\itemtt{\_show\_usage}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
+	\begin{framescelte}{Scelte Progettuali}
+		Si è scelto di utilizzare in modo estensivo le variabili globali in quanto in un progetto di così ridotte dimensioni si aumenta notevolmente la leggibilità del codice e nel contempo se ne riduce la complessità di scrittura. Se il progetto avesse richiesto computazioni più complesse questo approccio non sarebbe stato l'ideale, poiché sarebbero state compromesse le prestazioni totali dell'applicazione.
+	\end{framescelte}
+	\subsection{Variabili Locali}
+	\begin{itemize}
+		\itemtt{\hyperref[v:1:9]{usage}}: Stringa per la descrizione del corretto utilizzo del programma;
+		\itemtt{\hyperref[v:1:10]{USAGE\_LENGTH}}: Contiene la lunghezza della stringa, necessaria per la stampa.
+	\end{itemize}
+	
+	\subsection{Funzioni ed Etichette}
+	
+	%		\myparagraph{\_start}{Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}.}
+	%		
+	%		\myparagraph{\_main\_loop}{Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{EBX} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF}) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.}
+	%		
+	%		\myparagraph{\_end}{Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{EXIT}.}
+	%		
+	%		\myparagraph{\_show\_usage}{Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.}
+	%		
+	\begin{itemize}
+		\itemtt{\hyperref[e:1:1]{\_start}}: Punto di entrata del programma. Si occupa di controllare che il numero di parametri sia corretto, in caso contrario stampa la stringa \texttt{usage} e termina. Dopo il controllo chiama la funzione \texttt{\_open\_files} definita nel file \texttt{open\_files.s}. 
+		\itemtt{\hyperref[e:1:2]{\_main\_loop}}: Loop principale. Viene chiamata la funzione \texttt{\_read\_line} definita nel file \texttt{read\_line.s}, nel caso in cui il contenuto del registro \texttt{ebx} sia equivalente a -1 significa che il file di input è terminato (\textbf{EOF} $\rightarrow$ End Of File) quindi salta a \texttt{\_end}, altrimenti chiama la funzione \texttt{\_check} definita nel file \texttt{check.s} e la funzione \texttt{\_write\_line} definita nel file \texttt{write\_line.s}, dopodiché riesegue il ciclo.
+		\itemtt{\hyperref[e:1:3]{\_end}}: Si occupa di chiudere tutti i file aperti e della corretta uscita dal programma tramite la chiamata di sistema \texttt{exit}.
+		\itemtt{\hyperref[e:1:4]{\_show\_usage}}: Nel caso in cui i parametri non siano corretti stampa a video la stringa \texttt{usage} e termina il programma segnalando errore con il codice 1.
 	\end{itemize}  
 	
 	\section{open\_files.s}
@@ -288,22 +342,22 @@ inner sep=0pt]
 	
 	\subsection{Variabili Locali} 
 	\begin{itemize}
-		\itemtt{error\_opening\_files}: Stringa di errore in caso di errata apertura dei file (e.g. file mancante, file corrotto, \ldots).
-		\itemtt{ERROR\_OPENING\_LENGTH}: Costante che contiene la lunghezza della stringa di errore.
+		\itemtt{\hyperref[v:2:1]{error\_opening\_files}}: Stringa di errore in caso di errata apertura dei file (e.g. file mancante, file corrotto, \ldots).
+		\itemtt{\hyperref[v:2:2]{ERROR\_OPENING\_LENGTH}}: Costante che contiene la lunghezza della stringa di errore.
 	\end{itemize}
 	
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\_open\_files}: Si occupa di aprire i file e gestisce eventuali errori. In caso il file di output non esistesse, questo viene creato in automatico con permessi di lettura e scrittura. I descrittori ottenuti vengono salvati nelle corrispondenti variabili globali. 
-		\itemtt{\_error\_opening\_files}: In caso di errore viene stampato su \texttt{STDERR} la stringa opportuna, dopodiché il programma viene terminato con codice di errore 2. 
+		\itemtt{\hyperref[e:2:1]{\_open\_files}}: Si occupa di aprire i file e gestisce eventuali errori. In caso il file di output non esistesse, questo viene creato in automatico con permessi di lettura e scrittura. I descrittori ottenuti vengono salvati nelle corrispondenti variabili globali. 
+		\itemtt{\hyperref[e:2:2]{\_error\_opening\_files}}: In caso di errore viene stampato su \texttt{STDERR} la stringa opportuna, dopodiché il programma viene terminato con codice di errore 2. 
 	\end{itemize}
 	
 	\section{read\_line.s}
 	Contiene la funzione che si occupa di leggere ed interpretare una riga per volta del file di input.
 	\subsection{Variabili Locali}
 	\begin{itemize}
-		\itemtt{input\_buff}: Buffer di dimensione \texttt{INPUT\_BUFF\_LEN} che conterrà i caratteri della riga letta dal file di input.
-		\itemtt{INPUT\_BUFF\_LEN}: Dimensione del buffer.
+		\itemtt{\hyperref[v:3:1]{input\_buff}}: Buffer di dimensione \texttt{INPUT\_BUFF\_LEN} che conterrà i caratteri della riga letta dal file di input.
+		\itemtt{\hyperref[v:3:2]{INPUT\_BUFF\_LEN}}: Dimensione del buffer.
 	\end{itemize}
 	
 	\begin{framescelte}{Scelte Progettuali}
@@ -312,8 +366,8 @@ inner sep=0pt]
 	
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\_read\_line}: Legge dal file una riga tramite la chiamata di sistema \texttt{read} e si occupa di richiedere la traduzione dei caratteri letti in interi mediante la funzione \texttt{\_atoi} definita nel file \texttt{atoi.s} salvandoli successivamente nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof};
-		\itemtt{\_eof}: In caso di \texttt{EOF} mette -1 in \texttt{ebx} e ritorna.
+		\itemtt{\hyperref[e:3:1]{\_read\_line}}: Legge dal file una riga tramite la chiamata di sistema \texttt{read} e si occupa di richiedere la traduzione dei caratteri letti in interi mediante la funzione \texttt{\_atoi} definita nel file \texttt{atoi.s} salvandoli successivamente nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof};
+		\itemtt{\hyperref[e:3:2]{\_eof}}: In caso di \texttt{EOF} mette -1 in \texttt{ebx} e ritorna.
 	\end{itemize}
 	
 	
@@ -321,20 +375,20 @@ inner sep=0pt]
 	Contiene la funzione che si occupa di convertire una serie di caratteri \texttt{ASCII} in un numero intero. 
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\_atoi}: Vengono inizializzati i registri necessari alla conversione;
-		\itemtt{\_atoi\_loop}: Loop principale, converte la stringa puntata dal registro \texttt{edi} in un intero salvato e ritornato in \texttt{eax}. 
+		\itemtt{\hyperref[e:4:1]{\_atoi}}: Vengono inizializzati i registri necessari alla conversione;
+		\itemtt{\hyperref[e:4:2]{\_atoi\_loop}}: Loop principale, converte la stringa puntata dal registro \texttt{edi} in un intero salvato e ritornato in \texttt{eax}. 
 	\end{itemize}
 	
 	\section{check.s}
 	Contiene la funzione che si occupa di settare sulla base dei valori di input e dei valori del ciclo precedente i corretti parametri delle variabili \texttt{alm, mod, numb}. 
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\_check}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
-		\itemtt{\_fg / \_sg / \_opt}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
-		\itemtt{\_reset\_numb}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
-		\itemtt{\_set\_alm}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portando il valore di \texttt{alm} a 1.
-		\itemtt{\_init\_0}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
-		\itemtt{\_end\_check}: Abbiamo ritenuto opportuno (per evitare di preoccupare troppo il conducente) considerare un numero di secondi di massimo due cifre. Prima di terminare la funzione si controlla che il valore di \texttt{numb} non sia superiore a 99, in caso si salta a \texttt{\_numb\_overflow} che azzera \texttt{numb}.
+		\itemtt{\hyperref[e:5:1]{\_check}}: In base ai valori di \texttt{init} e \texttt{rpm} si occupa di saltare all'etichetta corretta. 
+		\itemtt{\hyperref[e:5:2]{\_fg / \_sg / \_opt}}: Etichette corrispondenti alle modalità di funzionamento previste dalle specifiche. Si occupano di settare i corretti valori di \texttt{alm, mod, numb}. L'unica modalità che necessita di una gestione particolare è \texttt{fg} in cui bisogna settare l'eventuale allarme. 
+		\itemtt{\hyperref[e:5:3]{\_reset\_numb}}: Nel caso in cui sia stata cambiata la modalità di funzionamento oppure il valore della variabile \texttt{reset} sia pari a 1, viene settata la modalità corretta, resettato il conteggio \texttt{numb} e "spento" \texttt{alm}.
+		\itemtt{\hyperref[e:5:4]{\_set\_alm}}: Se il motore è nella modalità \texttt{fg} da più di 15 secondi, viene "acceso" l'allarme portando il valore di \texttt{alm} a 1.
+		\itemtt{\hyperref[e:5:5]{\_init\_0}}: Se il valore di \texttt{init} è pari a 0 tutte le variabili di output vengono poste a 0 dal momento che il motore è spento. 
+		\itemtt{\hyperref[e:5:6]{\_end\_check}}: Abbiamo ritenuto opportuno (per evitare di preoccupare troppo il conducente) considerare un numero di secondi di massimo due cifre. Prima di terminare la funzione si controlla che il valore di \texttt{numb} non sia superiore a 99, in caso si salta a \texttt{\_numb\_overflow} che azzera \texttt{numb}.
 	\end{itemize}
 	
 	\begin{framescelte}{Scelte Progettuali}
@@ -344,52 +398,675 @@ inner sep=0pt]
 	\section{write\_line.s}
 	Contiene la funzione che si occupa di creare la stringa di output e scriverla sul corrispondente file. 
 	Ricordiamo qui la codifica utilizzata delle modalità di funzionamento e la struttura di una singola riga di output:
-		\begin{table}[!h]
-			\centering
-			\begin{tabular}{| l | c | c |}
-				\hline
-				Spento & 0 & 00 \\ \hline
-				SG & 1 & 01 \\ \hline
-				OPT & 2 & 10 \\ \hline
-				FG & 3 & 11 \\ \hline
-			\end{tabular}
-			\\
-			\vspace{5mm}
-			\begin{tabular}{| c | c | c | c | c | c |}
-				\hline
-				\texttt{alm} (1 byte) & , & \texttt{mod} (2 byte) & , & \texttt{numb} (2 byte) &  \texttt{\textbackslash n} \\ \hline
-			\end{tabular}
-		\end{table}
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{| l | c | c |}
+			\hline
+			Spento & 0 & 00 \\ \hline
+			SG & 1 & 01 \\ \hline
+			OPT & 2 & 10 \\ \hline
+			FG & 3 & 11 \\ \hline
+		\end{tabular}
+		\\
+		\vspace{5mm}
+		\begin{tabular}{| c | c | c | c | c | c |}
+			\hline
+			\texttt{alm} (1 byte) & , & \texttt{mod} (2 byte) & , & \texttt{numb} (2 byte) &  \texttt{\textbackslash n} \\ \hline
+		\end{tabular}
+	\end{table}
 	\subsection{Variabili Locali}
-		\begin{itemize}
-			\itemtt{output\_buff}: Buffer di dimensione \texttt{OUTPUT\_BUFF\_LEN} che conterrà i caratteri della stringa da scrivere sul file di output.
-			\itemtt{OUTPUT\_BUFF\_LEN}: Dimensione del buffer.
-			\itemtt{MOD\_XX}: Stringhe costanti che identificano la modalità di funzionamento corrispondente in binario.
-			\itemtt{MOD\_LEN}: Dimensione delle stringhe di modalità.
-		\end{itemize}
-			
+	\begin{itemize}
+		\itemtt{\hyperref[v:6:1]{output\_buff}}: Buffer di dimensione \texttt{OUTPUT\_BUFF\_LEN} che conterrà i caratteri della stringa da scrivere sul file di output.
+		\itemtt{\hyperref[v:6:2]{OUTPUT\_BUFF\_LEN}}: Dimensione del buffer.
+		\itemtt{\hyperref[v:6:3]{MOD\_XX}}: Stringhe costanti che identificano la modalità di funzionamento corrispondente in binario.
+		\itemtt{\hyperref[v:6:4]{MOD\_LEN}}: Dimensione delle stringhe di modalità.
+	\end{itemize}
+	
 	\subsection{Funzioni ed Etichette}
-		\begin{itemize}
-			\itemtt{\_write\_line}: Inizializza i registri necessari alla scrittura sulla variabile buffer.
-			\itemtt{\_alm\_X}: Aggiunge al buffer il corretto valore di \texttt{alm}.
-			\itemtt{\_print\_mod}: Aggiunge al buffer una virgola come separatore e in base al valore di \texttt{mod} salta alla corrispondente etichetta.
-			\itemtt{\_mod\_X}: La stringa corrispondente alla modalità X codificata in binario viene messa in \texttt{eax}, in seguito viene aggiunta al buffer nell'etichetta \texttt{\_end\_print\_mod}.
-			\itemtt{\_print\_numb}: Si occupa di aggiungere al buffer il valore di \texttt{numb} opportunamente convertito in \texttt{ASCII} e di terminare la stringa con il carattere \texttt{\textbackslash n}.
-			\itemtt{\_numb\_one\_digit}: Se il valore di \texttt{numb} è minore di 10 si occupa di aggiungere uno 0 come prima cifra.
-		\end{itemize}
+	\begin{itemize}
+		\itemtt{\hyperref[e:6:1]{\_write\_line}}: Inizializza i registri necessari alla scrittura sulla variabile buffer.
+		\itemtt{\hyperref[e:6:2]{\_alm\_X}}: Aggiunge al buffer il corretto valore di \texttt{alm}.
+		\itemtt{\hyperref[e:6:3]{\_print\_mod}}: Aggiunge al buffer una virgola come separatore e in base al valore di \texttt{mod} salta alla corrispondente etichetta.
+		\itemtt{\hyperref[e:6:4]{\_mod\_X}}: La stringa corrispondente alla modalità X codificata in binario viene messa in \texttt{eax}, in seguito viene aggiunta al buffer nell'etichetta \texttt{\_end\_print\_mod}.
+		\itemtt{\hyperref[e:6:5]{\_print\_numb}}: Si occupa di aggiungere al buffer il valore di \texttt{numb} opportunamente convertito in \texttt{ASCII} e di terminare la stringa con il carattere \texttt{\textbackslash n}.
+		\itemtt{\hyperref[e:6:6]{\_numb\_one\_digit}}: Se il valore di \texttt{numb} è minore di 10 si occupa di aggiungere uno 0 come prima cifra.
+	\end{itemize}
 	
 	\section{itoa.s}
 	Contiene la funzione per convertire un valore da intero a una corrispondente stringa \texttt{ASCII}.
 	\subsection{Funzioni ed Etichette} 
-		\begin{itemize}
-			\itemtt{\_itoa}: Inizializza i registri necessari alla conversione.
-			\itemtt{\_itoa\_dividi}: Si occupa di contare i caratteri necessari per la stringa e di posizionare il carattere \texttt{\textbackslash 0} alla fine della stringa.
-			\itemtt{\_itoa\_converti}: Scrive ogni cifra nella posizione corretta della stringa.
-		\end{itemize}
+	\begin{itemize}
+		\itemtt{\hyperref[e:7:1]{\_itoa}}: Inizializza i registri necessari alla conversione.
+		\itemtt{\hyperref[e:7:2]{\_itoa\_dividi}}: Si occupa di contare i caratteri necessari per la stringa e di posizionare il carattere \texttt{\textbackslash 0} alla fine della stringa.
+		\itemtt{\hyperref[e:7:3]{\_itoa\_converti}}: Scrive ogni cifra nella posizione corretta della stringa.
+	\end{itemize}
 	
 	\section{close\_files.s}
 	Contiene la funzione per chiudere correttamente un file. 
 	
-
 	
+	\newpage
+	
+	
+		\section{Codice}
+		
+		\subsection{syscall.inc}
+		
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+			# file di definizione delle chiamate di sistema linux
+			
+			.equ    SYS_EXIT, 1(*@\label{s:1}@*)
+			.equ    SYS_READ, 3
+			.equ    SYS_WRITE, 4
+			.equ    SYS_OPEN, 5
+			.equ    SYS_CLOSE, 6
+			
+			.equ    STDIN, 0
+			.equ    STDOUT, 1
+			.equ    STDERR, 2
+			
+			.equ    SYSCALL, 0x80
+		\end{lstlisting}
+		\subsection{main.s}
+		%	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/main.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: main.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: File principale, punto di inizio del programma.
+		.include    "syscall.inc"
+		
+		.section    .data
+		input_fd:   .long 0(*@\label{v:1:1}@*)         # variabile globale che conterrà il file
+		# descriptor del file di input
+		
+		output_fd:  .long 0(*@\label{v:1:2}@*)         # variabile globale che conterrà il file
+		# descriptor del file di output
+		
+		# Variabili globali per i segnali di input
+		init:   .long 0(*@\label{v:1:3}@*)
+		reset:  .long 0(*@\label{v:1:4}@*)
+		rpm:    .long 0(*@\label{v:1:5}@*)
+		
+		# Variabili globali per i segnali di output
+		alm:    .long 0(*@\label{v:1:6}@*)
+		numb:   .long 0(*@\label{v:1:8}@*)
+		mod:    .long 0(*@\label{v:1:7}@*)
+		
+		# Codice del programma
+		
+		.section    .text
+		.globl  input_fd
+		.globl  output_fd
+		.globl  init
+		.globl  reset
+		.globl  rpm
+		.globl  alm
+		.globl  numb
+		.globl  mod
+		.globl  _start
+		
+		# Stringa per mostrare l'utilizzo del programma in caso di parametri errati
+		usage(*@\label{v:9}@*):  .asciz "usage: programName inputFilePath outputFilePath\n"
+		.equ    USAGE_LENGTH(*@\label{v:10}@*), .-usage
+		
+		_start:(*@\label{e:1:1}@*)
+		# Recupero i parametri del main
+		popl    %eax                # Numero parametri
+		
+		# Controllo argomenti, se sbagliati mostro l'utilizzo corretto
+		cmpl    $3, %eax
+		jne     _show_usage
+		
+		popl    %eax                # Nome programma
+		popl    %eax                # Primo parametro (nome file di input)
+		popl    %ebx                # Secondo parametro (nome file di output)
+		
+		# NB: non salvo ebp in quanto non ha alcuna utilità
+		# nella funzione start che comunque non ritorna
+		
+		movl    %esp, %ebp
+		
+		call    _open_files         # Apertura dei file
+		
+		_main_loop:(*@\label{e:1:2}@*)
+		
+		call    _read_line          # Leggiamo la riga
+		
+		cmpl    $-1, %ebx           # EOF se ebx == -1
+		je      _end
+		
+		call    _check              # Controllo delle variabili
+		
+		call    _write_line         # Scrittura delle variabili di output su file
+		
+		jmp     _main_loop          # Leggi un altra riga finché non è EOF
+		
+		_end:(*@\label{e:1:3}@*)
+		
+		call    _close_files        # Chiudi correttamente i file
+		
+		# sys_exit(0);
+		movl    $SYS_EXIT, %eax
+		movl    $0, %ebx
+		int     $SYSCALL
+		
+		_show_usage:(*@\label{e:1:4}@*)
+		# esce in caso di errore con codice 1
+		# sys_write(stdout, usage, USAGE_LENGTH);
+		movl    $SYS_WRITE, %eax
+		movl    $STDOUT, %ebx
+		movl    $usage, %ecx
+		movl    $USAGE_LENGTH, %edx
+		int     $SYSCALL
+		
+		# sys_exit(1);
+		movl    $SYS_EXIT, %eax
+		movl    $1, %ebx
+		int     $SYSCALL
+		
+		\end{lstlisting}
+		
+		\subsection{open\_files.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: open_files.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: File contenente la funzione che si occupa di aprire i file di input e di
+		# output, i file descriptor vengono inseriti in variabili globali.
+		# Si suppone che il nome dei due file siano salvati negli indirizzi contenuti
+		# rispettivamente in %eax (input) ed in %ebx (output).
+		
+		.include "syscall.inc"
+		
+		.section .text
+		
+		error_opening_files:(*@\label{v:2:1}@*) .asciz "errore nell' apertura dei file\n"
+		.equ	ERROR_OPENING_LENGTH(*@\label{v:2:2}@*), .-error_opening_files
+		
+		.globl	_open_files				# Dichiaro la funzione globale
+		.type 	_open_files, @function 	# Dichiaro l'etichetta come una funzione
+		
+		_open_files:(*@\label{e:2:1}@*)
+		
+		pushl	%ebp
+		movl 	%esp, %ebp
+		
+		pushl	%ebx					# Pusho l' indirizzo del file di output
+		# sullo stack
+		
+		movl 	%eax, %ebx 				# Sposto l' indirizzo del file che vado
+		# ad aprire in %ebx
+		
+		movl 	$SYS_OPEN, %eax 		# Chiamata di sistema open
+		movl 	$0, %ecx 				# read-only mode
+		int 	$SYSCALL 				# Apro il file
+		
+		cmpl 	$0, %eax
+		jl		_error_opening_files
+		
+		movl 	%eax, input_fd			# Metto il file descriptor nella
+		# sua variabile
+		
+		popl 	%ebx 					# Riprendo l' indirizzo del nome del file
+		# di output che avevo messo sullo stack
+		
+		movl 	$SYS_OPEN, %eax 		# Chiamata di sistema open
+		movl 	$01101, %ecx 			# read and write mode
+		movl    $0666, %edx            	# flags
+		int 	$SYSCALL 				# Apro il file
+		
+		cmpl 	$0, %eax
+		jl		_error_opening_files
+		
+		movl 	%eax, output_fd			# Metto il file descriptor nella
+		# sua variabile
+		
+		movl 	%ebp, %esp
+		popl	%ebp
+		ret 							# Ritorna al chiamante
+		
+		_error_opening_files:(*@\label{e:2:2}@*)
+		# Esce con codice di errore 2
+		# sys_write(stdout, usage, USAGE_LENGTH);
+		movl 	$SYS_WRITE, %eax
+		movl 	$STDERR, %ebx
+		movl 	$error_opening_files, %ecx
+		movl 	$ERROR_OPENING_LENGTH, %edx
+		int 	$SYSCALL
+		
+		# sys_exit(2);
+		movl 	$SYS_EXIT, %eax
+		movl 	$2, %ebx
+		int 	$SYSCALL
+		\end{lstlisting}
+		
+		\subsection{read\_line.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: read_line.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che legge una riga alla volta del file di input.
+		
+		.include "syscall.inc"
+		
+		.section .bss
+		.equ	INPUT_BUFF_LEN, 9(*@\label{v:3:2}@*)
+		input_buff:	.space INPUT_BUFF_LEN(*@\label{v:3:1}@*)	# Input buffer di 9 byte
+		
+		.section .text
+		.globl 	_read_line
+		.type   _read_line, @function
+		
+		_read_line:(*@\label{e:3:1}@*)
+		pushl	%ebp
+		movl 	%esp, %ebp
+		
+		# Lettura riga
+		# sys_read(input_fd, input_buff, INPUT_BUFF_LEN);
+		movl    input_fd, %ebx
+		movl    $SYS_READ, %eax
+		leal    input_buff, %ecx
+		movl    $INPUT_BUFF_LEN, %edx
+		int     $SYSCALL
+		
+		cmpl    $0, %eax                    # Se eax == 0 EOF
+		je      _eof
+		
+		# Estrazione dei valori di init, reset, rpm dal buffer
+		leal    input_buff, %edi
+		call    _atoi
+		movl    %eax, init
+		
+		incl    %edi						# Salto il carattere ','
+		
+		call    _atoi
+		movl    %eax, reset
+		
+		incl    %edi						# Salto il carattere ','
+		
+		call    _atoi
+		movl    %eax, rpm
+		
+		movl    %ebp, %esp
+		popl    %ebp
+		
+		xorl    %ebx, %ebx					# ebx = 0 permette di proseguire
+		ret
+		
+		_eof:(*@\label{e:3:2}@*)
+		# in caso di EOF %ebx = -1
+		movl    %ebp, %esp
+		popl    %ebp
+		
+		movl    $-1, %ebx
+		ret
+		\end{lstlisting}
+		
+		\newpage
+		\subsection{atoi.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: atoi.s
+		# Autori: Alessandro Righi, Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che converte una stringa in intero.
+		
+		.section .text
+		.globl	_atoi
+		.type	_atoi, @function
+		
+		# Funzione che converte una stringa di input in numero
+		# Prototipo C-style:
+		#   uint32_t atoi(const char *string);
+		# Parametri di input:
+		#   EDI - Stringa da convertire
+		# Parametri di output:
+		#   EAX - Valore convertito
+		
+		_atoi:(*@\label{e:4:1}@*)
+		xorl	%eax, %eax   # azzero il registro EAX per contenere il risultato
+		xorl	%ebx, %ebx   # azzero EBX
+		movl	$10, %ecx    # sposto 10 in ECX che conterrà il valore moltiplicativo
+		
+		_atoi_loop:(*@\label{e:4:2}@*)
+		xorl	%ebx, %ebx
+		movb	(%edi), %bl  # sposto un byte dalla stringa in BL
+		subb	$48, %bl     # sottraggo il valore ASCII dello 0 a BL
+		# per avere un valore intero
+		
+		cmpb	$0, %bl      # Se il numero è minore di 0
+		jl		_atoi_end    # allora esco dal ciclo
+		cmpb	$10, %bl     # Se il numero è maggiore o uguale a 10
+		jge 	_atoi_end    # esco dal ciclo
+		
+		mull	%ecx         # altrimenti moltiplico EAX per 10
+		# (10 messo precedentemente in ECX)
+		addl	%ebx, %eax   # aggiungo a EAX il valore attuale
+		incl	%edi         # incremento EDI
+		
+		jmp		_atoi_loop   # rieseguo il ciclo
+		
+		_atoi_end:
+		ret
+		\end{lstlisting}
+		
+		\newpage
+		\subsection{check.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: check.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che controlla le variabili
+		# init, reset, rpm e setta le variabili alm, mod e numb
+		
+		.section .data
+		
+		.section .text
+		.globl  _check
+		.type   _check, @function
+		
+		_check:(*@\label{e:5:1}@*)
+		pushl   %ebp
+		movl    %esp, %ebp
+		
+		# Caso init == 0: alm = 0; mod = 0; numb = 0;
+		cmpl    $0, init
+		je      _init_0
+		
+		# Caso SG: alm = 0; mod = 1; numb = reset == 1 ? 0 : numb + 1;
+		cmpl    $2000, rpm
+		jl      _sg
+		
+		# Caso OPT: alm = 0; mod = 2; numb = reset == 1 ? 0 : numb + 1;
+		cmpl    $4000, rpm
+		jle     _opt
+		
+		# Caso FG: alm = numb >= 15? 1 : 0; mod = 3; numb = reset == 1 ? 0 : numb + 1;
+		_fg:(*@\label{e:5:2}@*)
+		# Salviamo la nuova modalita' in %eax e controlliamo reset
+		movl    $3, %eax
+		cmpl    $1, reset
+		je      _reset_numb
+		
+		# Se la nuova modalità non è la stessa si resetta il numero di secondi
+		cmpl    $3, mod
+		jne     _reset_numb
+		
+		incl    numb
+		movl    %eax, mod
+		
+		# Se il numero di secondi è maggiore o uguale a 15 viene alzata l'allarme
+		cmpl    $15, numb
+		jge      _set_alm
+		
+		jmp     _end_check
+		
+		_opt:
+		movl    $2, %eax
+		cmpl    $1, reset
+		je      _reset_numb
+		
+		cmpl    $2, mod
+		jne     _reset_numb
+		
+		incl    numb
+		movl    %eax, mod
+		
+		jmp     _end_check
+		
+		_sg:
+		movl    $1, %eax
+		cmpl    $1, reset
+		je      _reset_numb
+		
+		cmpl    $1, mod
+		jne      _reset_numb
+		
+		incl    numb
+		movl    %eax, mod
+		
+		jmp     _end_check
+		
+		_reset_numb:(*@\label{e:5:3}@*)
+		movl    %eax, mod
+		movl    $0, numb
+		movl    $0, alm
+		
+		jmp     _end_check
+		
+		_set_alm:(*@\label{e:5:4}@*)
+		movl    $1, alm
+		
+		
+		jmp     _end_check
+		
+		_init_0:(*@\label{e:5:5}@*)
+		movl    $0, alm
+		movl    $0, numb
+		movl    $0, mod
+		
+		_end_check:(*@\label{e:5:6}@*)
+		
+		# Se il numero di secondi supera i 99 allora dobbiamo ricominciare il conteggio
+		cmpl    $99, numb
+		jg      _numb_overflow
+		movl    %ebp, %esp
+		popl    %ebp
+		
+		ret
+		
+		_numb_overflow:(*@\label{e:5:7}@*)
+		movl    $0, numb
+		jmp     _end_check
+		\end{lstlisting}
+		
+		\subsection{write\_line.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: check.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che scrive una riga alla volta nel file di output
+		
+		.include "syscall.inc"
+		
+		.section .bss
+		.equ	OUTPUT_BUFF_LEN, 8(*@\label{v:6:2}@*)
+		output_buff:(*@\label{v:6:1}@*) .space OUTPUT_BUFF_LEN
+		
+		.section .text
+		.globl  _write_line
+		.type   _write_line, @function
+		MOD_00: .ascii "00"(*@\label{v:6:3}@*)           # motore spento
+		MOD_01: .ascii "01"           # motore sotto giri
+		MOD_10: .ascii "10"           # motore in stato ottimale
+		MOD_11: .ascii "11"           # motore fuori giri
+		.equ 	MOD_LEN, 2(*@\label{v:6:4}@*)
+		
+		_write_line:(*@\label{e:6:1}@*)
+		pushl   %ebp
+		movl    %esp, %ebp
+		
+		leal    output_buff, %edi     # spostiamo il puntatore
+		# del buffer di output in EDI
+		
+		cmpl    $1, alm               # se l'allarme è 1 stampiamo 1
+		# altrimenti 0 senza chiamare funzioni
+		je      _alm_1
+		
+		_alm_0:(*@\label{e:6:2}@*)
+		movl    $48, (%edi)
+		jmp     _print_mod
+		
+		_alm_1:
+		movl    $49, (%edi)
+		
+		_print_mod:(*@\label{e:6:3}@*)
+		movl    $44, 1(%edi)          # aggiungiamo la virgola dopo
+		# il segnale di allarme
+		addl    $2, %edi              # spostiamo un immaginario cursore
+		# nella posizione dove stampare la mod
+		
+		cmpl    $1, mod               # controlliamo il valore di mod
+		# e stampiamo la stringa corretta in base
+		# alla giusta modalita' di funzionamento
+		je      _mod_1
+		cmpl    $2, mod
+		je      _mod_2
+		cmpl    $3, mod
+		je      _mod_3
+		
+		_mod_0:(*@\label{e:6:4}@*)
+		movl    MOD_00, %eax
+		jmp _end_print_mod
+		
+		_mod_1:
+		movl    MOD_01, %eax
+		jmp _end_print_mod
+		
+		_mod_2:
+		movl    MOD_10, %eax
+		jmp _end_print_mod
+		
+		_mod_3:
+		movl    MOD_11, %eax
+		
+		_end_print_mod:
+		movl    %eax, (%edi)          # mettiamo la stringa nell' output_buff
+		addl    $MOD_LEN, %edi        # spostato il cursore (la posizione di edi)
+		# nel punto esatto dove scrivere
+		movl    $44, (%edi)           # aggiungiamo la virgola
+		incl    %edi                  # spostiamo il cursore
+		
+		cmpl    $10, numb             # controlliamo se il numero di secondi
+		# è ad una sola cifra, in tal caso
+		# aggiungiamola cifra 0
+		jl      _numb_one_digit
+		
+		_print_numb:(*@\label{e:6:5}@*)
+		movl    numb, %eax            # prepariamo la chiamata per itoa
+		
+		call    _itoa                 # chiamiamo itoa
+		
+		
+		leal    output_buff, %edi     # mettiamo il puntatore di output_buff in edi
+		addl    $7, %edi              # ci aggiungiamo 7 per arrivare
+		# alla fine della stringa,
+		movl    $10, (%edi)           # punto nel quale aggiungiamo un \n
+		
+		movl    $SYS_WRITE, %eax
+		movl    output_fd, %ebx
+		leal    output_buff, %ecx
+		movl    $OUTPUT_BUFF_LEN, %edx
+		int     $SYSCALL
+		
+		
+		movl    %ebp, %esp
+		popl    %ebp
+		
+		ret
+		
+		_numb_one_digit:(*@\label{e:6:6}@*)
+		movl    $48, (%edi)
+		incl    %edi
+		jmp     _print_numb
+		\end{lstlisting}
+		
+		\subsection{itoa.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: itoa.s
+		# Autori: Alessandro Righi, Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che converte un intero in stringa
+		# Prototipo C-style:
+		#   u_int32_t itoa(uint32_t val, char *string);
+		# Parametri di input:
+		#   EAX - Valore intero unsigned a 64bit da convertire
+		#   EDI - Puntatore alla stringa su cui salvare il risultato
+		# Parametri di output:
+		#   EAX - Lunghezza della stringa convertita (compresiva di \0 finale)
+		
+		.section .text
+		.global _itoa
+		.type   _itoa, @function
+		
+		_itoa:(*@\label{e:7:1}@*)
+		movl    $10, %ecx   # porto il fattore moltiplicativo in ECX
+		movl    %eax, %ebx  # salvo temporaneamente il valore di EAX in EBX
+		xorl    %esi, %esi  # azzero il registro ESI
+		
+		_itoa_dividi:(*@\label{e:7:2}@*)
+		xorl    %edx, %edx  # azzero EDX per fare la divisione
+		divl    %ecx        # divide EAX per ECX, salva il resto in EDX
+		incl    %esi        # incrementa il contatore
+		testl   %eax, %eax  # se il valore di EAX non è zero ripeti il ciclo
+		jnz     _itoa_dividi
+		
+		addl    %esi, %edi  # somma all'indirizzo del buffer
+		# il numero di caratteri del numero
+		movl    %ebx, %eax  # rimette il valore da convertire in EAX
+		movl    %esi, %ebx  # salvo il valore della lunghezza della stringa in EBX
+		
+		movl    $0, (%edi)  # aggiungo un null terminator alla fine della stringa
+		decl    %edi        # decremento il contatore della stringa di 1
+		
+		_itoa_converti:(*@\label{e:7:3}@*)
+		xorl    %edx, %edx  # azzero EDX per fare la divisione
+		divl    %ecx        # divido EAX per ECX, salvo il valore del resto in EDX
+		addl    $48, %edx   # sommo 48 a EDX
+		movb    %dl, (%edi) # sposto il byte inferiore di EDX (DL)
+		# nella locazione di memoria puntata da EDI
+		decl    %edi        # decremento il puntatore della stringa
+		decl    %esi        # decremento il contatore
+		testl   %esi, %esi  # se il contatore non è 0 continua ad eseguire il loop
+		jnz     _itoa_converti
+		
+		movl    %ebx, %eax  # porto il valore della lunghezza
+		# della stringa in EAX per ritornarlo
+		incl    %eax        # incremento di 1 EAX (in modo da includere il \0)
+		ret
+		\end{lstlisting}
+		
+		\subsection{close\_files.s}
+		\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+		# Progetto Assembly 2016
+		# File: check.s
+		# Autori: Noè Murr, Mirko Morati
+		#
+		# Descrizione: Funzione che chiude i file aperti precedentemente
+		
+		.include "syscall.inc"
+		
+		.section .text
+		.globl 	_close_files 			 # Dichiaro la funzione globale
+		.type 	_close_files, @function  # Dichiaro l' etichetta come una funzione
+		
+		_close_files:
+		
+		pushl	%ebp
+		movl 	%esp, %ebp
+		
+		# sys_close(input_fd);
+		movl	$SYS_CLOSE, %eax
+		movl	input_fd, %ebx
+		int 	$SYSCALL
+		
+		# sys_close(output_fd);
+		movl	$SYS_CLOSE, %eax
+		movl	output_fd, %ebx
+		int 	$SYSCALL
+		
+		
+		movl    %ebp, %esp
+		popl    %ebp
+		
+		ret
+		\end{lstlisting}
+		
 	\end{document}

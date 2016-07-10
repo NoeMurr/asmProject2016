@@ -24,3 +24,13 @@
 \contentsline {section}{\numberline {10}itoa.s}{9}{section.10}
 \contentsline {subsection}{\numberline {10.1}Funzioni ed Etichette}{9}{subsection.10.1}
 \contentsline {section}{\numberline {11}close\_files.s}{9}{section.11}
+\contentsline {section}{\numberline {12}Codice}{10}{section.12}
+\contentsline {subsection}{\numberline {12.1}syscall.inc}{10}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}main.s}{10}{subsection.12.2}
+\contentsline {subsection}{\numberline {12.3}open\_files.s}{12}{subsection.12.3}
+\contentsline {subsection}{\numberline {12.4}read\_line.s}{13}{subsection.12.4}
+\contentsline {subsection}{\numberline {12.5}atoi.s}{15}{subsection.12.5}
+\contentsline {subsection}{\numberline {12.6}check.s}{16}{subsection.12.6}
+\contentsline {subsection}{\numberline {12.7}write\_line.s}{18}{subsection.12.7}
+\contentsline {subsection}{\numberline {12.8}itoa.s}{20}{subsection.12.8}
+\contentsline {subsection}{\numberline {12.9}close\_files.s}{21}{subsection.12.9}
