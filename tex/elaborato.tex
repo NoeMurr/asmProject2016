@@ -298,13 +298,13 @@ inner sep=0pt]
 	
 	\subsection{Variabili Globali}
 	\begin{itemize}
-		\itemtt{\hyperref[v:1:1]{input\_fd}}: Contiene il descrittore del file di input;
-		\itemtt{\hyperref[v:1:2]{output\_fd}}: Contiene il descrittore del file di output;
-		\itemtt{\hyperref[v:1:3]{init}}: Contiene il valore del segnale INIT corrente;
-		\itemtt{\hyperref[v:1:4]{reset}}: Contiene il valore del segnale RESET corrente;
-		\itemtt{\hyperref[v:1:5]{rpm}}: Contiene il valore del segnale RPM corrente;
-		\itemtt{\hyperref[v:1:6]{alm}}: Contiene il valore del segnale ALM corrente;
-		\itemtt{\hyperref[v:1:7]{mod}}: Contiene il valore del segnale MOD corrente;
+		\itemtt{\hyperref[v:1:1]{input\_fd}}: Contiene il descrittore del file di input.
+		\itemtt{\hyperref[v:1:2]{output\_fd}}: Contiene il descrittore del file di output.
+		\itemtt{\hyperref[v:1:3]{init}}: Contiene il valore del segnale INIT corrente.
+		\itemtt{\hyperref[v:1:4]{reset}}: Contiene il valore del segnale RESET corrente.
+		\itemtt{\hyperref[v:1:5]{rpm}}: Contiene il valore del segnale RPM corrente.
+		\itemtt{\hyperref[v:1:6]{alm}}: Contiene il valore del segnale ALM corrente.
+		\itemtt{\hyperref[v:1:7]{mod}}: Contiene il valore del segnale MOD corrente.
 		\itemtt{\hyperref[v:1:8]{numb}}: Contiene il valore del segnale NUMB corrente.
 	\end{itemize}
 	
@@ -313,7 +313,7 @@ inner sep=0pt]
 	\end{framescelte}
 	\subsection{Variabili Locali}
 	\begin{itemize}
-		\itemtt{\hyperref[v:1:9]{usage}}: Stringa per la descrizione del corretto utilizzo del programma;
+		\itemtt{\hyperref[v:1:9]{usage}}: Stringa per la descrizione del corretto utilizzo del programma.
 		\itemtt{\hyperref[v:1:10]{USAGE\_LENGTH}}: Contiene la lunghezza della stringa, necessaria per la stampa.
 	\end{itemize}
 	
@@ -354,7 +354,7 @@ inner sep=0pt]
 	
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\hyperref[e:3:1]{\_read\_line}}: Legge dal file una riga tramite la chiamata di sistema \texttt{read} e si occupa di richiedere la traduzione dei caratteri letti in interi mediante la funzione \texttt{\_atoi} definita nel file \texttt{atoi.s} salvandoli successivamente nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof};
+		\itemtt{\hyperref[e:3:1]{\_read\_line}}: Legge dal file una riga tramite la chiamata di sistema \texttt{read} e si occupa di richiedere la traduzione dei caratteri letti in interi mediante la funzione \texttt{\_atoi} definita nel file \texttt{atoi.s} salvandoli successivamente nelle rispettive variabili globali. In caso i caratteri letti siano pari a 0 salta all'etichetta \texttt{\_eof}.
 		\itemtt{\hyperref[e:3:2]{\_eof}}: In caso di \texttt{EOF} mette -1 in \texttt{ebx} e ritorna.
 	\end{itemize}
 	
@@ -363,7 +363,7 @@ inner sep=0pt]
 	Contiene la funzione che si occupa di convertire una serie di caratteri \texttt{ASCII} in un numero intero. 
 	\subsection{Funzioni ed Etichette}
 	\begin{itemize}
-		\itemtt{\hyperref[e:4:1]{\_atoi}}: Vengono inizializzati i registri necessari alla conversione;
+		\itemtt{\hyperref[e:4:1]{\_atoi}}: Vengono inizializzati i registri necessari alla conversione.
 		\itemtt{\hyperref[e:4:2]{\_atoi\_loop}}: Loop principale, converte la stringa puntata dal registro \texttt{edi} in un intero salvato e ritornato in \texttt{eax}. 
 	\end{itemize}
 	

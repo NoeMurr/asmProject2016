@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  10 JUL 2016 23:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.8)  11 JUL 2016 00:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1896,7 +1896,7 @@ Package rerunfilecheck Info: File `elaborato.out' has not changed.
 Here is how much of TeX's memory you used:
  30650 strings out of 493089
  578866 string characters out of 6134843
- 994327 words of memory out of 5000000
+ 994325 words of memory out of 5000000
  32999 multiletter control sequences out of 15000+600000
  19595 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1917,7 +1917,7 @@ al/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local
 exlive/2015/texmf-dist/fonts/type1/public/cm-super/sfsl1095.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb>
-Output written on elaborato.pdf (21 pages, 383283 bytes).
+Output written on elaborato.pdf (21 pages, 383090 bytes).
 PDF statistics:
  1116 PDF objects out of 1200 (max. 8388607)
  1066 compressed objects within 11 object streams
