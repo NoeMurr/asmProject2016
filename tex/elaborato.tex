@@ -199,7 +199,25 @@ inner sep=0pt]
 
 \begin{document}
 	\clearpage
-	\maketitle
+%	\maketitle
+	\begin{titlepage}
+		\centering
+		\vspace*{\fill}
+		\includegraphics[width=0.15\textwidth]{logo.png}\par\vspace{1cm}
+		{\scshape\LARGE Università degli Studi di Verona \par}
+		\vspace{1cm}
+		{\scshape\Large Architettura degli Elaboratori\par}
+		\vspace{1.5cm}
+		\\ \line(1,0){250} \\
+		{\huge\bfseries Elaborato Assembly\par}
+		\\ \line(1,0){250} \\
+		\vspace{2cm}
+		{\Large\itshape Mirko Morati, Noè Murr\par}
+		\vspace{5cm}
+		\vspace*{\fill}
+		% Bottom of the page
+		{\large \today\par}
+	\end{titlepage}
 	\thispagestyle{empty}
 	\newpage
 	\tableofcontents
@@ -478,8 +496,8 @@ inner sep=0pt]
 		.globl  _start
 		
 		# Stringa per mostrare l'utilizzo del programma in caso di parametri errati
-		usage(*@\label{v:9}@*):  .asciz "usage: programName inputFilePath outputFilePath\n"
-		.equ    USAGE_LENGTH(*@\label{v:10}@*), .-usage
+		usage(*@\label{v:1:9}@*):  .asciz "usage: programName inputFilePath outputFilePath\n"
+		.equ    USAGE_LENGTH(*@\label{v:1:10}@*), .-usage
 		
 		_start:(*@\label{e:1:1}@*)
 		# Recupero i parametri del main
