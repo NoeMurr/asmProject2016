@@ -1,0 +1,325 @@
+%
+%------------------------------------------------------------------------------------
+%	AUTORI: Morati Mirko, Noè Murr
+%------------------------------------------------------------------------------------
+%
+
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{calc}
+\usepackage[a4paper]{geometry}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+%\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage{enumitem}
+%\usepackage{minted}
+\usepackage{float}
+\usepackage{array}
+\usepackage{zref-xr}
+\zexternaldocument[e-]{elaborato}[elaborato.pdf]
+
+%\renewcommand\listingscaption{}
+%\newcommand\ceil[1]{\lceil#1\rceil}
+\usepackage{zi4}
+\usepackage{tikz}
+\usetikzlibrary{automata, arrows, positioning, calc, matrix, shapes.geometric, chains}
+\usepackage{verbatim}
+
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+
+
+\newenvironment{framescelte}[1]
+{\mdfsetup{
+		frametitle={\colorbox{white}{\space#1\space}},
+		innertopmargin=6pt,
+		frametitleaboveskip=-\ht\strutbox,
+		frametitlealignment=\center
+	}
+	\begin{mdframed}%
+	}
+	{\end{mdframed}}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.25in
+\textheight=9in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+
+% Set up the header and footer
+\pagestyle{fancy}
+%\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+%\cfoot{} % Bottom center footer
+%\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+%------------------------------------------------------------------------------------
+%	TITOLO
+%------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Codice\ Elaborato\ Assembly}
+\newcommand{\hmwkClass}{Architettura degli Elaboratori}
+\newcommand{\hmwkAuthorName}{Mirko Morati,\ Noè Murr}
+
+%------------------------------------------------------------------------------------
+%	TITLE PAGE
+%------------------------------------------------------------------------------------
+
+\title{
+	\vspace{2in}
+	\textmd{\textbf{\hmwkClass:\\ \hmwkTitle}}\\
+	\vspace{0.1in}\large{\textit{\hmwkAuthorName}}
+	\vspace{3in}
+}
+
+%\author{}
+
+%------------------------------------------------------------------------------------
+
+
+%------------------------------------------------------------------------------------
+%	FORMATTAZIONE ELEMENTI
+%------------------------------------------------------------------------------------
+%\renewcommand*{\ttdefault}{zi4}
+%\newcommand{\stato}[1]{\textbf{\fontfamily{zi4}\selectfont #1}}
+%\newcommand{\signin}[1]{\textcolor{BrickRed}{\fontfamily{zi4}\selectfont #1}}
+%\newcommand{\signout}[1]{\textcolor{Blue}{\fontfamily{zi4}\selectfont #1}}
+%\newcommand{\inctxt}[1]{\textit{\fontfamily{zi4}\selectfont #1}}
+%------------------------------------------------------------------------------------
+
+\renewcommand{\labelitemi}{$\cdot$}
+
+\newcommand{\Assembly}{\texttt{Assembly} }
+
+\newcommand{\itemtt}[1]{\item \texttt{#1}}
+
+
+
+\lstdefinestyle{BashStyle}{
+	language=bash,
+	basicstyle=\ttfamily,
+	numbers=left,
+	numberstyle=\tiny\ttfamily\color{black},
+	numbersep=-10pt,
+	frame=tb,
+	columns=fullflexible,
+	title=\textit{},
+	emph={souce, ps, map, -s, rl, rlib},emphstyle={\bfseries}
+}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\lstdefinelanguage{MyAssembler}{
+	morecomment=[l][\color{mygray}]{\#},
+	morekeywords=[2]{eax, ebx, ecx, edx, edi, esp, ebp, al, bl, cl, dl, ah, bh, ch, dh},
+%	morekeywords=[3]{\$, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+	morekeywords=[4]{popl,popb,pushl,pushb,jne,jn,call,int,movl,movb,xorl,xorb,subl,subb,addl,addb,mull,mulb,incl,cmpb,cmpl,jl,jg,jge,jle,je,jmp,ret},
+	morekeywords=[5]{section,data,type,long,bss,text,globl,equ,ascii,asciz,include},
+	morestring=[b][\color{mymauve}]{"},
+	morekeywords=[6][\color{Violet}]{},
+	morekeywords=[7]{input\_fd,output\_fd,init,reset,rpm,alm,numb,mod}
+	}
+	
+\lstdefinestyle{MyAsm}{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygray},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	literate={è}{{\'e}}1 {ì}{{\'i}}1 {é}{{\'e}}1  {ò}{{\'o}}1 {à}{{\'a}}1,
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	keywordstyle=[2]\color{BrickRed},
+%	keywordstyle=[3]\color{green},
+	keywordstyle=[4]\color{blue},	
+	keywordstyle=[5]\color{Green},
+	keywordstyle=[7]\color{Orange},
+	%language={[x86masm]Assembler},                 % the language of the code
+	otherkeywords={...},           % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=4,	                   % sets default tabsize to 2 spaces
+	%title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+\begin{document}
+	\clearpage
+	\maketitle
+	\thispagestyle{empty}
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{main.s}
+%	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/main.s}
+	\begin{lstlisting}[language=MyAssembler, style=MyAsm]
+	# Progetto Assembly 2016
+	# File: main.s
+	# Autori: Noè Murr, Mirko Morati
+	#
+	# Descrizione: File principale, punto di inizio del programma.
+	.include    "syscall.inc"
+	
+	.section    .data
+	input_fd:   .long 0         # variabile globale che conterrà il file
+	# descriptor del file di input
+	
+	output_fd:  .long 0         # variabile globale che conterrà il file
+	# descriptor del file di output
+	
+	# Variabili globali per i segnali di input
+	init:   .long 0
+	reset:  .long 0
+	rpm:    .long 0
+	
+	# Variabili globali per i segnali di output
+	alm:    .long 0
+	numb:   .long 0
+	mod:    .long 0
+	
+	# Codice del programma
+	
+	.section    .text
+	.globl  input_fd
+	.globl  output_fd
+	.globl  init
+	.globl  reset
+	.globl  rpm
+	.globl  alm
+	.globl  numb
+	.globl  mod
+	.globl  _start
+	
+	# Stringa per mostrare l'utilizzo del programma in caso di parametri errati
+	usage:  .asciz "usage: programName inputFilePath outputFilePath\n"
+	.equ    USAGE_LENGTH, .-usage
+	
+	_start:
+	# Recupero i parametri del main
+	popl    %eax                # Numero parametri
+	
+	# Controllo argomenti, se sbagliati mostro l'utilizzo corretto
+	cmpl    $3, %eax
+	jne     _show_usage
+	
+	popl    %eax                # Nome programma
+	popl    %eax                # Primo parametro (nome file di input)
+	popl    %ebx                # Secondo parametro (nome file di output)
+	
+	# NB: non salvo ebp in quanto non ha alcuna utilità
+	# nella funzione start che comunque non ritorna
+	
+	movl    %esp, %ebp
+	
+	call    _open_files         # Apertura dei file
+	
+	_main_loop:
+	
+	call    _read_line          # Leggiamo la riga
+	
+	cmpl    $-1, %ebx           # EOF se ebx == -1
+	je      _end
+	
+	call    _check              # Controllo delle variabili
+	
+	call    _write_line         # Scrittura delle variabili di output su file
+	
+	jmp     _main_loop          # Leggi un altra riga finché non è EOF
+	
+	_end:
+	
+	call    _close_files        # Chiudi correttamente i file
+	
+	# sys_exit(0);
+	movl    $SYS_EXIT, %eax
+	movl    $0, %ebx
+	int     $SYSCALL
+	
+	_show_usage:
+	# esce in caso di errore con codice 1
+	# sys_write(stdout, usage, USAGE_LENGTH);
+	movl    $SYS_WRITE, %eax
+	movl    $STDOUT, %ebx
+	movl    $usage, %ecx
+	movl    $USAGE_LENGTH, %edx
+	int     $SYSCALL
+	
+	# sys_exit(1);
+	movl    $SYS_EXIT, %eax
+	movl    $1, %ebx
+	int     $SYSCALL
+	
+	\end{lstlisting}
+	
+	\section{open\_files.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/open_files.s}
+	
+	\section{read\_line.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/read_line.s}
+	
+	\section{atoi.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/atoi.s}
+	
+	\section{check.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/check.s}
+	
+	\section{itoa.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/itoa.s}
+	
+	\section{write\_line.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/write_line.s}
+	
+	\section{close\_files.s}
+	\lstinputlisting[style=MyAsm, language = MyAssembler]{../src/close_files.s}
+
+\end{document}

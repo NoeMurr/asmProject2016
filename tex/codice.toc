@@ -1,0 +1,10 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}main.s}{3}{section.1}
+\contentsline {section}{\numberline {2}open\_files.s}{4}{section.2}
+\contentsline {section}{\numberline {3}read\_line.s}{6}{section.3}
+\contentsline {section}{\numberline {4}atoi.s}{7}{section.4}
+\contentsline {section}{\numberline {5}check.s}{8}{section.5}
+\contentsline {section}{\numberline {6}itoa.s}{10}{section.6}
+\contentsline {section}{\numberline {7}write\_line.s}{11}{section.7}
+\contentsline {section}{\numberline {8}close\_files.s}{13}{section.8}

@@ -1,11 +1,14 @@
-# funzione che chiude i file aperti precedentemente
-.code32									# per indicare all' assemblatore di
-										# assemblare a 32 bit
+# Progetto Assembly 2016
+# File: check.s
+# Autori: Noè Murr, Mirko Morati
+#
+# Descrizione: Funzione che chiude i file aperti precedentemente
+
 .include "syscall.inc"
 
 .section .text
-	.globl 	_close_files 				# dichiaro la funzione globale
-	.type 	_close_files, @function 	# dichiaro l' etichetta come una funzione
+	.globl 	_close_files 			 # Dichiaro la funzione globale
+	.type 	_close_files, @function  # Dichiaro l' etichetta come una funzione
 
 _close_files:
 
@@ -15,16 +18,15 @@ _close_files:
 	# sys_close(input_fd);
 	movl	$SYS_CLOSE, %eax
 	movl	input_fd, %ebx
-	int 	$SYSCALL 
+	int 	$SYSCALL
 
 	# sys_close(output_fd);
 	movl	$SYS_CLOSE, %eax
 	movl	output_fd, %ebx
-	int 	$SYSCALL 
+	int 	$SYSCALL
 
 
 	movl    %ebp, %esp
     popl    %ebp
 
-    ret 
-    
+    ret
