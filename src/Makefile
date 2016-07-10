@@ -1,11 +1,15 @@
-# Makefile per il progetto assembly
+# Progetto Assembly 2016
+# File: open_files.s
+# Autori: Noè Murr, Mirko Morati
+#
+# Descrizione: Makefile per il progetto assembly
 
 AS:=as
 ASFLAGS:=-gstabs --32
 LD:=ld
 LDFLAGS:=-m elf_i386
 BINNAME=elaborato
-OBJ= main.o open_files.o read_line.o check.o write_line.o itoa.o atoi.o close_files.o 
+OBJ= main.o open_files.o read_line.o check.o write_line.o itoa.o atoi.o close_files.o
 HEADERS=syscall.inc
 RM=rm -rf
 ECHO=/bin/echo
@@ -40,6 +44,3 @@ clean:
 
 
 rebuild: clean $(BINNAME)
-
-help:
-	@$(ECHO) "Cazzate sull'help scriverle qua"

@@ -22,7 +22,7 @@
 \BOOKMARK [1][-]{section.10}{itoa.s}{}% 22
 \BOOKMARK [2][-]{subsection.10.1}{Funzioni ed Etichette}{section.10}% 23
 \BOOKMARK [1][-]{section.11}{close\137files.s}{}% 24
-\BOOKMARK [1][-]{section.12}{Codice}{}% 25
+\BOOKMARK [1][-]{section.12}{Codice Sorgente}{}% 25
 \BOOKMARK [2][-]{subsection.12.1}{syscall.inc}{section.12}% 26
 \BOOKMARK [2][-]{subsection.12.2}{main.s}{section.12}% 27
 \BOOKMARK [2][-]{subsection.12.3}{open\137files.s}{section.12}% 28

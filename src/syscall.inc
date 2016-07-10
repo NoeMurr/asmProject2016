@@ -1,4 +1,8 @@
-# file di definizione delle chiamate di sistema linux
+# Progetto Assembly 2016
+# File: open_files.s
+# Autori: Noè Murr, Mirko Morati
+#
+# Descrizione: File di definizione delle chiamate di sistema linux
 
 .equ    SYS_EXIT, 1
 .equ    SYS_READ, 3

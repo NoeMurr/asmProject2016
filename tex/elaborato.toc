@@ -24,7 +24,7 @@
 \contentsline {section}{\numberline {10}itoa.s}{8}{section.10}
 \contentsline {subsection}{\numberline {10.1}Funzioni ed Etichette}{8}{subsection.10.1}
 \contentsline {section}{\numberline {11}close\_files.s}{8}{section.11}
-\contentsline {section}{\numberline {12}Codice}{9}{section.12}
+\contentsline {section}{\numberline {12}Codice Sorgente}{9}{section.12}
 \contentsline {subsection}{\numberline {12.1}syscall.inc}{9}{subsection.12.1}
 \contentsline {subsection}{\numberline {12.2}main.s}{9}{subsection.12.2}
 \contentsline {subsection}{\numberline {12.3}open\_files.s}{11}{subsection.12.3}
